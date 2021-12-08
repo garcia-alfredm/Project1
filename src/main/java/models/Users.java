@@ -7,6 +7,7 @@ public class Users {
     String firstName;
     String LastName;
     String email;
+    /* Foreign Key */
     Integer roleId;
     //model composite key of username, email
 

@@ -9,12 +9,12 @@ public class Users {
     String email;
     /* Foreign Key */
     Integer roleId;
-    //model composite key of username, email
 
     public Users() {
     }
 
-    public Users(Integer id, String username, String password, String firstName, String lastName, String email, Integer roleId) {
+    public Users(Integer id, String username, String password, String firstName,
+                 String lastName, String email, Integer roleId) {
         this.id = id;
         this.username = username;
         this.password = password;

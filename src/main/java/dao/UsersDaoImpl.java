@@ -40,7 +40,6 @@ public class UsersDaoImpl implements UsersDao {
                         rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
                 users.add(user);
             }
-
         } catch (SQLException e) {
             logger.error(e);
         }
@@ -49,7 +48,25 @@ public class UsersDaoImpl implements UsersDao {
 
     @Override
     public Users getOneUser(Integer userId) {
-        return null;
+        Users user = null;
+        try {
+            Connection conn = DriverManager.getConnection(url ,username, password);
+            String sql = "SELECT * FROM ers_users WHERE ers_user_id = ?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next() ){
+                user = new Users(rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+            }
+
+
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+        return user;
     }
 
     @Override

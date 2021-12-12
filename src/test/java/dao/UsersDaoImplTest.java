@@ -49,10 +49,15 @@ public class UsersDaoImplTest {
     @Test
     void getOneUser() {
         //assign
+        Users expectedResult = new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1 );
+        usersDao.createUser(expectedResult);
 
         //act
+        Users actualResult = usersDao.getOneUser(expectedResult.getId());
 
         //assert
+        assertEquals(expectedResult.toString(), actualResult.toString());
     }
 
     @Test

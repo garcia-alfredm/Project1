@@ -86,17 +86,30 @@ public class UsersDaoImpl implements UsersDao {
 
         } catch (SQLException e) {
             logger.error(e);
+            return false;
         }
         return true;
     }
 
     @Override
     public Boolean updateUser(Integer userId, String value) {
-        return null;
+        return false;
     }
 
     @Override
     public Boolean deleteUser(Integer userId) {
-        return null;
+        try{
+            Connection conn = DriverManager.getConnection(url, username, password);
+            String sql = "DELETE FROM ers_users WHERE ers_user_id = ?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            logger.error(e);
+            return false;
+        }
+        return true;
     }
 }

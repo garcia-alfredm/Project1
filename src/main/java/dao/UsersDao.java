@@ -15,7 +15,7 @@ public interface UsersDao {
 
     Boolean createUser(Users user);
 
-    //todo, allow update name, email, username, password
+    //todo, allow update name, email, username, password?
     Boolean updateUser(Integer userId, String value);
 
     Boolean deleteUser(Integer userId);

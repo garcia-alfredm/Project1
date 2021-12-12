@@ -68,10 +68,10 @@ public class UsersDaoImplTest {
                 "One", "user1@email.com", 1 ));
         expectedResults.add(new Users("user2", "password", "User",
                 "Two", "user2@email.com", 1 ));
-        usersDao.createUser(expectedResults.get(0));
-        usersDao.createUser(expectedResults.get(1));
 
         //act
+        usersDao.createUser(expectedResults.get(0));
+        usersDao.createUser(expectedResults.get(1));
         Integer actualResult = usersDao.getAllUsers().size();
 
         //assert
@@ -90,9 +90,15 @@ public class UsersDaoImplTest {
     @Test
     void deleteUser() {
         //assign
+        Boolean expectedResult = true;
+        Users user = new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1 );
+        usersDao.createUser(user);
 
         //act
+        Boolean actualResult = usersDao.deleteUser(user.getId());
 
         //assert
+        assertEquals(expectedResult, actualResult);
     }
 }

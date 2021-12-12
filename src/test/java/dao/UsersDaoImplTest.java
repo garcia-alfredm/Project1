@@ -1,7 +1,13 @@
 package dao;
 
+import models.Users;
 import org.junit.jupiter.api.*;
 import util.H2Util;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UsersDaoImplTest {
 
@@ -9,43 +15,79 @@ public class UsersDaoImplTest {
 
     UsersDaoImplTest(){ this.usersDao = new UsersDaoImpl(H2Util.url, H2Util.username, H2Util.password); }
 
-    @BeforeAll
-    void setLookUpTables(){
-        H2Util.createUserRolesTable();
-    }
-
-    @AfterAll
-    void dropLookUpTables(){
-        H2Util.dropUserRolesTable();
-    }
-
     @BeforeEach
     void setUp() {
+        H2Util.createUserRolesTable();
+        //H2Util.defineUserRolesTable();
         H2Util.createErsUsersTable();
     }
 
     @AfterEach
     void tearDown() {
         H2Util.dropErsUsersTable();
+        H2Util.dropUserRolesTable();
     }
 
     @Test
     void getAllUsers() {
+        //assign
+        List<Users> expectedResults = new ArrayList<>();
+        expectedResults.add(new Users("user1", "password", "User",
+                "One", "user1@email.com", 1 ));
+        expectedResults.add(new Users("user2", "password", "User",
+                "Two", "user2@email.com", 1 ));
+        usersDao.createUser(expectedResults.get(0));
+        usersDao.createUser(expectedResults.get(1));
+
+        //act
+        List<Users> actualResults = usersDao.getAllUsers();
+
+        //assert
+        assertEquals(expectedResults.toString(), actualResults.toString());
     }
 
     @Test
     void getOneUser() {
+        //assign
+
+        //act
+
+        //assert
     }
 
     @Test
     void createUser() {
+        //assign
+        List<Users> expectedResults = new ArrayList<>();
+        expectedResults.add(new Users("user1", "password", "User",
+                "One", "user1@email.com", 1 ));
+        expectedResults.add(new Users("user2", "password", "User",
+                "Two", "user2@email.com", 1 ));
+        usersDao.createUser(expectedResults.get(0));
+        usersDao.createUser(expectedResults.get(1));
+
+        //act
+        Integer actualResult = usersDao.getAllUsers().size();
+
+        //assert
+        assertEquals(expectedResults.size(), actualResult);
     }
 
     @Test
     void updateUser() {
+        //assign
+
+        //act
+
+        //assert
     }
 
     @Test
     void deleteUser() {
+        //assign
+
+        //act
+
+        //assert
     }
 }

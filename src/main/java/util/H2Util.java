@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class H2Util {
     /* location of dummy db inc username, password */
@@ -86,10 +88,33 @@ public class H2Util {
                     "\tuser_role varchar(10) NOT NULL\n" +
                     ")";
             PreparedStatement ps = conn.prepareStatement(sql);
-
-
-
             ps.executeUpdate();
+
+            List<String> statements = new ArrayList<>();
+            statements.add("INSERT INTO ers_user_roles VALUES(1, 'EMPLOYEE');");
+            statements.add("INSERT INTO ers_user_roles VALUES(2, 'MANAGER');");
+
+            for (String x : statements ) {
+                ps = conn.prepareStatement(x);
+                ps.executeUpdate();
+            }
+
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //todo delete defineUserRolesTable
+    public static void defineUserRolesTable(){
+        try{
+            Connection conn = DriverManager.getConnection(url, username, password);
+            String sql = "INSERT INTO ers_user_roles VALUES(1, ?);";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "EMPLOYEE");
+            ps.executeUpdate();
+
             conn.close();
 
         } catch (SQLException e) {
@@ -118,12 +143,12 @@ public class H2Util {
             String sql = "CREATE TABLE ers_users(\n" +
                     "\ters_user_id serial PRIMARY KEY,\n" +
                     "\ters_username varchar(50) UNIQUE NOT NULL,\n" +
-                    " \ters_password varchar(50) NOT NULL DEFAULT 'password',\n" +
+                    "\ters_password varchar(50) NOT NULL DEFAULT 'password',\n" +
                     "\tuser_first_name varchar(100) NOT NULL,\n" +
                     "\tuser_last_name varchar(100) NOT NULL,\n" +
                     "\tuser_email varchar(150) UNIQUE NOT NULL,\n" +
-                    "\tuser_role_id_fk int REFERENCES ers_user_roles(ers_user_role_id) NOT NULL\n" +
-                    ")";
+                    "\tuser_role_id_fk int REFERENCES ers_user_roles(ers_user_role_id)\n" +
+                    ");";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.executeUpdate();
@@ -137,7 +162,7 @@ public class H2Util {
     public static void dropErsUsersTable(){
         try{
             Connection conn = DriverManager.getConnection(url, username, password);
-            String sql = "DROP TABLE ers_users;";
+            String sql = "DROP TABLE ers_users";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.executeUpdate();
@@ -159,10 +184,10 @@ public class H2Util {
                     "\treimb_resolved timestamp DEFAULT NULL,\n" +
                     "\treimb_description varchar(250) DEFAULT NULL,\n" +
                     "\treimb_receipt bytea UNIQUE DEFAULT NULL,\n" +
-                    "\treimb_author_fk int REFERENCES ers_users(ers_user_id) NOT NULL,\n" +
+                    "\treimb_author_fk int REFERENCES ers_users(ers_user_id),\n" +
                     "\treimb_resolver_fk int REFERENCES ers_users(ers_user_id) DEFAULT NULL,\n" +
                     "\treimb_status_id_fk int REFERENCES ers_reimbursement_status(reimb_status_id) DEFAULT 1,\n" +
-                    "\treimb_type_id_fk int REFERENCES ers_reimbursement_type(reimb_type_id) NOT NULL\n" +
+                    "\treimb_type_id_fk int REFERENCES ers_reimbursement_type(reimb_type_id)\n" +
                     ")";
             PreparedStatement ps = conn.prepareStatement(sql);
 

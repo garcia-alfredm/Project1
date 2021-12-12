@@ -13,6 +13,16 @@ public class Users {
     public Users() {
     }
 
+    public Users(String username, String password, String firstName, String lastName, String email, Integer roleId) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        LastName = lastName;
+        this.email = email;
+        this.roleId = roleId;
+    }
+
+    //todo determine to delete constructor
     public Users(Integer id, String username, String password, String firstName,
                  String lastName, String email, Integer roleId) {
         this.id = id;

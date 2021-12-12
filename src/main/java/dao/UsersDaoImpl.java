@@ -3,6 +3,8 @@ package dao;
 import models.Users;
 import org.apache.log4j.Logger;
 
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsersDaoImpl implements UsersDao {
@@ -26,7 +28,23 @@ public class UsersDaoImpl implements UsersDao {
 
     @Override
     public List<Users> getAllUsers() {
-        return null;
+        List<Users> users = new ArrayList<>();
+        try{
+            Connection conn = DriverManager.getConnection(url, username, password);
+            String sql = "SELECT * FROM ers_users;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                Users user = new Users(rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+                users.add(user);
+            }
+
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+        return users;
     }
 
     @Override
@@ -36,7 +54,23 @@ public class UsersDaoImpl implements UsersDao {
 
     @Override
     public Boolean createUser(Users user) {
-        return null;
+        try{
+            Connection conn = DriverManager.getConnection(url, username, password);
+            String sql = "INSERT INTO ers_users VALUES(DEFAULT, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getFirstName());
+            ps.setString(4, user.getLastName());
+            ps.setString(5, user.getEmail());
+            ps.setInt(6, user.getRoleId());
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+        return true;
     }
 
     @Override

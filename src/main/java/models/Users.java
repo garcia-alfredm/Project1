@@ -22,7 +22,7 @@ public class Users {
         this.roleId = roleId;
     }
 
-    //todo determine to delete constructor
+    //todo determine to delete constructor, only use for testing
     public Users(Integer id, String username, String password, String firstName,
                  String lastName, String email, Integer roleId) {
         this.id = id;
@@ -33,6 +33,8 @@ public class Users {
         this.email = email;
         this.roleId = roleId;
     }
+
+
 
     public Integer getId() {
         return id;

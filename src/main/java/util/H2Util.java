@@ -91,8 +91,8 @@ public class H2Util {
             ps.executeUpdate();
 
             List<String> statements = new ArrayList<>();
-            statements.add("INSERT INTO ers_user_roles VALUES(1, 'EMPLOYEE');");
-            statements.add("INSERT INTO ers_user_roles VALUES(2, 'MANAGER');");
+            statements.add("INSERT INTO ers_user_roles VALUES(DEFAULT, 'EMPLOYEE');");
+            statements.add("INSERT INTO ers_user_roles VALUES(DEFAULT, 'MANAGER');");
 
             for (String x : statements ) {
                 ps = conn.prepareStatement(x);
@@ -110,7 +110,7 @@ public class H2Util {
     public static void defineUserRolesTable(){
         try{
             Connection conn = DriverManager.getConnection(url, username, password);
-            String sql = "INSERT INTO ers_user_roles VALUES(1, ?);";
+            String sql = "INSERT INTO ers_user_roles VALUES(default, ?);";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "EMPLOYEE");
             ps.executeUpdate();

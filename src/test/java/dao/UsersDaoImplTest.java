@@ -32,9 +32,9 @@ public class UsersDaoImplTest {
     void getAllUsers() {
         //assign
         List<Users> expectedResults = new ArrayList<>();
-        expectedResults.add(new Users("user1", "password", "User",
+        expectedResults.add(new Users(1, "user1", "password", "User",
                 "One", "user1@email.com", 1 ));
-        expectedResults.add(new Users("user2", "password", "User",
+        expectedResults.add(new Users(2, "user2", "password", "User",
                 "Two", "user2@email.com", 1 ));
         usersDao.createUser(expectedResults.get(0));
         usersDao.createUser(expectedResults.get(1));

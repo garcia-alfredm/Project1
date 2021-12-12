@@ -81,10 +81,16 @@ public class UsersDaoImplTest {
     @Test
     void updateUser() {
         //assign
+        Boolean expectedResult = true;
+        Users user = new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1 );
+        usersDao.createUser(user);
 
         //act
+        Boolean actualResult = usersDao.updateUser(1,"ers_password", "p4ssw0rd");
 
         //assert
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test

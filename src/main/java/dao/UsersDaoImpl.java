@@ -92,8 +92,46 @@ public class UsersDaoImpl implements UsersDao {
     }
 
     @Override
-    public Boolean updateUser(Integer userId, String value) {
-        return false;
+    public Boolean updateUser(Integer userId, String column, String value) {
+        try{
+            Connection conn = DriverManager.getConnection(url, username, password);
+            StringBuilder sql = new StringBuilder();
+
+            switch(column){
+                case "ers_password":
+                    sql.append("UPDATE ers_users SET ers_password = ? WHERE ers_user_id = ?;");
+                    PreparedStatement ps = conn.prepareStatement(sql.toString());
+                    ps.setString(1, value);
+                    ps.setInt(2, userId);
+                    ps.executeUpdate();
+                    break;
+                case "user_first_name":
+                    sql.append("UPDATE ers_users SET user_first_name = ? WHERE ers_user_id = ?;");
+                    ps = conn.prepareStatement(sql.toString());
+                    ps.setString(1, value);
+                    ps.setInt(2, userId);
+                    ps.executeUpdate();
+                    break;
+                case "user_last_name":
+                    sql.append("UPDATE ers_users SET user_last_name = ? WHERE ers_user_id = ?;");
+                    ps = conn.prepareStatement(sql.toString());
+                    ps.setString(1, value);
+                    ps.setInt(2, userId);
+                    ps.executeUpdate();
+                    break;
+                case "user_email":
+                    sql.append("UPDATE ers_users SET user_email = ? WHERE ers_user_id = ?;");
+                    ps = conn.prepareStatement(sql.toString());
+                    ps.setString(1, value);
+                    ps.setInt(2, userId);
+                    ps.executeUpdate();
+                    break;
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+            return false;
+        }
+        return true;
     }
 
     @Override

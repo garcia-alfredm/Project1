@@ -26,6 +26,17 @@ public class H2Util {
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.executeUpdate();
+
+            List<String> statements = new ArrayList<>();
+                statements.add("INSERT INTO ers_reimbursement_status VALUES(DEFAULT, 'PENDING');");
+                statements.add("INSERT INTO ers_reimbursement_status VALUES(DEFAULT, 'APPROVED');");
+                statements.add("INSERT INTO ers_reimbursement_status VALUES(DEFAULT, 'DENIED');");
+
+            for (String x : statements ) {
+                ps = conn.prepareStatement(x);
+                ps.executeUpdate();
+            }
+
             conn.close();
 
         } catch (SQLException e) {
@@ -58,6 +69,18 @@ public class H2Util {
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.executeUpdate();
+
+            List<String> statements = new ArrayList<>();
+                statements.add("INSERT INTO ers_reimbursement_type VALUES(DEFAULT, 'LODGING');");
+                statements.add("INSERT INTO ers_reimbursement_type VALUES(DEFAULT, 'TRAVEL');");
+                statements.add("INSERT INTO ers_reimbursement_type VALUES(DEFAULT, 'FOOD');");
+                statements.add("INSERT INTO ers_reimbursement_type VALUES(DEFAULT, 'OTHER');");
+
+            for (String x : statements ) {
+                ps = conn.prepareStatement(x);
+                ps.executeUpdate();
+            }
+
             conn.close();
 
         } catch (SQLException e) {
@@ -98,22 +121,6 @@ public class H2Util {
                 ps = conn.prepareStatement(x);
                 ps.executeUpdate();
             }
-
-            conn.close();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //todo delete defineUserRolesTable
-    public static void defineUserRolesTable(){
-        try{
-            Connection conn = DriverManager.getConnection(url, username, password);
-            String sql = "INSERT INTO ers_user_roles VALUES(default, ?);";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "EMPLOYEE");
-            ps.executeUpdate();
 
             conn.close();
 

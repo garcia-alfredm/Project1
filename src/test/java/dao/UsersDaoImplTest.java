@@ -18,7 +18,6 @@ public class UsersDaoImplTest {
     @BeforeEach
     void setUp() {
         H2Util.createUserRolesTable();
-        //H2Util.defineUserRolesTable();
         H2Util.createErsUsersTable();
     }
 

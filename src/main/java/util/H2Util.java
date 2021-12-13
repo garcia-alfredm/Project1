@@ -184,18 +184,18 @@ public class H2Util {
     public static void createErsReimburseTable(){
         try{
             Connection conn = DriverManager.getConnection(url, username, password);
-            String sql = "CREATE TABLE ers_reimbursement( \n" +
+            String sql = "CREATE TABLE ers_reimbursement(\n" +
                     "\treimb_id serial PRIMARY KEY,\n" +
                     "\treimb_amount NUMERIC (7,2) NOT NULL,\n" +
                     "\treimb_submitted timestamp DEFAULT now(),\n" +
-                    "\treimb_resolved timestamp DEFAULT NULL,\n" +
-                    "\treimb_description varchar(250) DEFAULT NULL,\n" +
-                    "\treimb_receipt bytea UNIQUE DEFAULT NULL,\n" +
+                    "\treimb_resolved timestamp,\n" +
+                    "\treimb_description varchar(250),\n" +
+                    "\treimb_receipt bytea UNIQUE,\n" +
                     "\treimb_author_fk int REFERENCES ers_users(ers_user_id),\n" +
-                    "\treimb_resolver_fk int REFERENCES ers_users(ers_user_id) DEFAULT NULL,\n" +
-                    "\treimb_status_id_fk int REFERENCES ers_reimbursement_status(reimb_status_id) DEFAULT 1,\n" +
+                    "\treimb_resolver_fk int REFERENCES ers_users(ers_user_id),\n" +
+                    "\treimb_status_id_fk int REFERENCES ers_reimbursement_status(reimb_status_id),\n" +
                     "\treimb_type_id_fk int REFERENCES ers_reimbursement_type(reimb_type_id)\n" +
-                    ")";
+                    ");";
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.executeUpdate();

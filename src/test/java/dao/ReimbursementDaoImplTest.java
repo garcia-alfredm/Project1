@@ -1,5 +1,6 @@
 package dao;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import models.Reimbursement;
 import models.Users;
 import org.junit.jupiter.api.AfterEach;
@@ -71,6 +72,20 @@ class ReimbursementDaoImplTest {
 
     @Test
     void getOneReimbursement() {
+        //assign
+        Users user = new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1 );
+        usersDao.createUser(user);
+
+        Reimbursement expectedResult = new Reimbursement(1, new BigDecimal("200.00"), date,
+                null, "Motel 6", null, 1, 0, 1, 1);
+        reimbursementDao.createReimbursement(expectedResult);
+
+        //act
+        Reimbursement actualResult = reimbursementDao.getOneReimbursement(1);
+
+        //assert
+        assertEquals(expectedResult.toString(), actualResult.toString());
     }
 
     @Test
@@ -98,6 +113,25 @@ class ReimbursementDaoImplTest {
 
     @Test
     void updateReimbursement() {
+        //assign
+        Boolean expectedResult = true;
+        List<Users> users = new ArrayList<>();
+        users.add(new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1 ));
+        users.add(new Users(2, "user2", "password", "User",
+                "Two", "user2@email.com", 2 ));
+        usersDao.createUser(users.get(0));
+        usersDao.createUser(users.get(1));
+
+        Reimbursement toPass = new Reimbursement(1, new BigDecimal("200.00"), date,
+                null, "Motel 6", null, 1, 0, 1, 1);
+        reimbursementDao.createReimbursement(toPass);
+
+        //act
+        Boolean actualResult = reimbursementDao.updateReimbursement(toPass.getId(), 2, 2);
+
+        //assert
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test

@@ -3,7 +3,6 @@ package dao;
 import models.Reimbursement;
 import org.apache.log4j.Logger;
 
-import java.net.ConnectException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +49,24 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
     @Override
     public Reimbursement getOneReimbursement(Integer reimburseId) {
-        return null;
+        Reimbursement reimbursement = null;
+        try{
+            Connection conn = DriverManager.getConnection(url, username, password);
+            String sql = "SELECT * FROM ers_reimbursement where reimb_id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, reimburseId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                reimbursement = new Reimbursement(rs.getInt(1), rs.getBigDecimal(2),
+                        rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getBytes(6),
+                        rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+        return reimbursement;
     }
 
     @Override
@@ -78,8 +94,23 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
     }
 
     @Override
-    public Boolean updateReimbursement(Integer reimburseId, String resolver) {
-        return null;
+    public Boolean updateReimbursement(Integer reimburseId, Integer resolverId, Integer statusId) {
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            String sql = "UPDATE ers_reimbursement SET reimb_resolved = now(), reimb_resolver_fk = ?"
+                    +", reimb_status_id_fk = ? WHERE reimb_id = ?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, resolverId);
+            ps.setInt(2, statusId);
+            ps.setInt(3, reimburseId);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            logger.error(e);
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -94,6 +125,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
         } catch (SQLException e) {
             logger.error(e);
+            return false;
         }
         return true;
     }

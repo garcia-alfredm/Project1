@@ -12,7 +12,7 @@ public interface ReimbursementDao {
 
     Boolean createReimbursement(Reimbursement reimburse);
 
-    Boolean updateReimbursement(Integer reimburseId, String resolver);
+    Boolean updateReimbursement(Integer reimburseId, Integer resolverId, Integer statusId);
 
     Boolean deleteReimbursement(Integer reimburseId);
 }

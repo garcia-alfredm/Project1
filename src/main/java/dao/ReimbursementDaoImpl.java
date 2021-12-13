@@ -3,6 +3,9 @@ package dao;
 import models.Reimbursement;
 import org.apache.log4j.Logger;
 
+import java.net.ConnectException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReimbursementDaoImpl implements ReimbursementDao {
@@ -26,7 +29,23 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
     @Override
     public List<Reimbursement> getAllReimbursements() {
-        return null;
+        List<Reimbursement> reimbursements = new ArrayList<>();
+        try{
+            Connection conn = DriverManager.getConnection(url, username, password);
+            String sql = "SELECT * FROM ers_reimbursement;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                Reimbursement reimb = new Reimbursement(rs.getInt(1), rs.getBigDecimal(2),
+                        rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getBytes(6),
+                        rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
+                reimbursements.add(reimb);
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+        return reimbursements;
     }
 
     @Override
@@ -36,7 +55,26 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
     @Override
     public Boolean createReimbursement(Reimbursement reimburse) {
-        return null;
+        try{
+            Connection conn = DriverManager.getConnection(url, username, password);
+            /* id amount submitted resolved desc receiptImg author resolver status typeid */
+            String sql = "INSERT INTO ers_reimbursement VALUES(DEFAULT, ?, ?, DEFAULT, ?, ?, ?, DEFAULT, ?, ? );";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setBigDecimal(1, reimburse.getAmount());
+            ps.setDate(2, (Date) reimburse.getSubmitted());
+            ps.setString(3, reimburse.getDescription());
+            ps.setBytes(4, reimburse.getReceiptImg());
+            ps.setInt(5, reimburse.getAuthor());
+            ps.setInt(6, reimburse.getStatus());
+            ps.setInt(7, reimburse.getTypeId());
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            logger.error(e);
+            return false;
+        }
+        return true;
     }
 
     @Override

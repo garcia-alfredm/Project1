@@ -1,15 +1,16 @@
 package models;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Reimbursement {
     Integer id;
-    Integer amount;
+    BigDecimal amount;
     Date submitted;
     Date resolved;
     String description;
     //receipt is a bytea
-    //Bytea receipt;
+    byte[] receiptImg;
     /* Foreign Keys */
     Integer author;
     Integer resolver;
@@ -19,14 +20,15 @@ public class Reimbursement {
     public Reimbursement() {
     }
 
-    public Reimbursement(Integer id, Integer amount, Date submitted,
-                         Date resolved, String description, Integer author,
+    public Reimbursement(Integer id, BigDecimal amount, Date submitted,
+                         Date resolved, String description, byte[] receiptImg, Integer author,
                          Integer resolver, Integer status, Integer typeId) {
         this.id = id;
         this.amount = amount;
         this.submitted = submitted;
         this.resolved = resolved;
         this.description = description;
+        this.receiptImg = receiptImg;
         this.author = author;
         this.resolver = resolver;
         this.status = status;
@@ -41,11 +43,11 @@ public class Reimbursement {
         this.id = id;
     }
 
-    public Integer getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -71,6 +73,14 @@ public class Reimbursement {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public byte[] getReceiptImg() {
+        return receiptImg;
+    }
+
+    public void setReceiptImg(byte[] receiptImg) {
+        this.receiptImg = receiptImg;
     }
 
     public Integer getAuthor() {

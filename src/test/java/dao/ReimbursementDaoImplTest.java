@@ -102,5 +102,25 @@ class ReimbursementDaoImplTest {
 
     @Test
     void deleteReimbursement() {
+        //assign
+        Users user = new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1 );
+        usersDao.createUser(user);
+
+        List<Reimbursement> expectedResults = new ArrayList<>();
+        expectedResults.add(new Reimbursement(1, new BigDecimal("200.00"), date,
+                null, "Motel 6", null, 1, 0, 1, 1));
+        expectedResults.add(new Reimbursement(2, new BigDecimal("10.00"), date,
+                null, "McDonalds", null, 1, 0, 1, 3));
+        reimbursementDao.createReimbursement(expectedResults.get(0));
+        reimbursementDao.createReimbursement(expectedResults.get(1));
+
+        //act
+        expectedResults.remove(0);
+        reimbursementDao.deleteReimbursement(1);
+        List<Reimbursement> actualResults = reimbursementDao.getAllReimbursements();
+
+        //assert
+        assertEquals(expectedResults.toString(), actualResults.toString());
     }
 }

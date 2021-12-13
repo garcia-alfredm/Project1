@@ -84,6 +84,17 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
     @Override
     public Boolean deleteReimbursement(Integer reimburseId) {
-        return null;
+        try{
+            Connection conn = DriverManager.getConnection(url, username, password);
+            String sql = "DELETE FROM ers_reimbursement WHERE reimb_id = ?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, reimburseId);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+        return true;
     }
 }

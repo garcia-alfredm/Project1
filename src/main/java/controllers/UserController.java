@@ -1,5 +1,6 @@
 package controllers;
 
+import Services.ReimbursementService;
 import Services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,6 +12,8 @@ import java.util.List;
 
 public class UserController {
     static UserService userService = new UserService();
+    //required when deleting a user, delete all reimbursements first
+    static ReimbursementService reimbursementService = new ReimbursementService();
 
     public UserController(){};
 

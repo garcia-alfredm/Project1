@@ -1,8 +1,12 @@
+let userId;
+
 window.onload = async () => {
     let response = await fetch("http://localhost:7000/api/check-session");
     console.log(response);
     let result = await response.json();
     console.log(result);
+    //get userId
+    userId = result.data.userId;
 
     //go to login if no session is found
     if(!result.successful){

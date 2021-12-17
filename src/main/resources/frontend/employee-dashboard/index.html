@@ -17,6 +17,35 @@
     </nav>
     <h2>Employee Dashboard</h2>
     <div id="user-info"></div>
+    <div class="request-container">
+        <form class="create-reimb-form" action="" onsubmit="createReimb(event)">
+            <input type="number" id="amount-input">
+            <input type="text" id="desc-input">
+            <input type="text" id="type-input">
+        </form>
+    </div>
+    <div class="display-requests">
+        <div class="display-container">
+            <div class="display-amount">Amount</div>
+            <div class="display-desc">Description</div>
+            <div class="display-submitted-date">Submitted Date</div>
+            <div class="display-resolved-date">Resolved Date</div>
+            <div class="display-resolver">Resolver</div>
+            <div class="status">Status</div>
+            <div class="type">Type</div>
+        </div>
+    </div>
+    <div class="display-requests">
+        <div class="display-container">
+            <div class="display-amount">Amount</div>
+            <div class="display-desc">Description</div>
+            <div class="display-submitted-date">Submitted Date</div>
+            <div class="display-resolved-date">Resolved Date</div>
+            <div class="display-resolver">Resolver</div>
+            <div class="status">Status</div>
+            <div class="type">Type</div>
+        </div>
+    </div>
 
     <script src="./script.js"></script>
     <script src="../globals/globals.js"></script>

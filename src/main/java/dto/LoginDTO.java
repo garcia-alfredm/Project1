@@ -1,6 +1,7 @@
 package dto;
 
 public class LoginDTO {
+    //Integer userId;
     String username;
     String role;
 

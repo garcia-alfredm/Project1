@@ -14,15 +14,15 @@ public class FrontController {
         app.post("/api/login", context -> {
             Login login = context.bodyAsClass(Login.class);
 
-            /* todo validate user credentials here */
+            /* todo validate user credentials here, gets user id */
 
             context.sessionAttribute("user-session", login);
-            context.json(
-                    new JsonResponse(true, "login successful",
+            context.json( new JsonResponse(true, "login successful",
                             new LoginDTO(login.getUsername(), login.getRole())));
         });
 
         app.get("/api/check-session", context -> {
+            //is used on every page, should include userid, full name, role
            Login login = context.sessionAttribute("user-session");
 
            if(login == null){

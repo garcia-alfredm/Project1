@@ -10,6 +10,8 @@ public interface ReimbursementDao {
 
     Reimbursement getOneReimbursement(Integer reimburseId);
 
+    List<Reimbursement> getUserReimbursements(Integer userId);
+
     Boolean createReimbursement(Reimbursement reimburse);
 
     Boolean updateReimbursement(Integer reimburseId, Integer resolverId, Integer statusId);

@@ -31,6 +31,15 @@ public class ReimbursementController {
         context.result(new ObjectMapper().writeValueAsString(reimbursement));
     }
 
+    public static void getUserReimbursements(Context context) throws JsonProcessingException {
+        context.contentType("application/json");
+        Integer userId = Integer.parseInt(context.pathParam("userId"));
+
+        List<Reimbursement> reimbursements = reimbursementService.getUserReimbursements(userId);
+        String jsonString = new ObjectMapper().writeValueAsString(reimbursements);
+        context.result(jsonString);
+    }
+
     public static void createReimbursement(Context context){
         Reimbursement reimbursement = context.bodyAsClass(Reimbursement.class);
         if(reimbursementService.createReimbursement(reimbursement)){

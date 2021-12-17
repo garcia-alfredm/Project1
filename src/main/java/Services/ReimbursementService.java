@@ -29,6 +29,10 @@ public class ReimbursementService {
         return this.reimbursementDao.getOneReimbursement(reimburseId);
     }
 
+    public List<Reimbursement> getUserReimbursements(Integer userId){
+        return this.reimbursementDao.getUserReimbursements(userId);
+    }
+
     public Boolean createReimbursement(Reimbursement reimbursement){
         return this.reimbursementDao.createReimbursement(reimbursement);
     }

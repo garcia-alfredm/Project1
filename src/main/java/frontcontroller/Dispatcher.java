@@ -19,7 +19,8 @@ public class Dispatcher {
         app.delete("/users/{id}", UserController::deleteUser);
 
         app.get("/reimbursements", ReimbursementController::getAllReimbursements);
-        app.get("/reimbursements/{reimbId}", ReimbursementController::getOneReimbursement);
+        //app.get("/reimbursements/{reimbId}", ReimbursementController::getOneReimbursement);
+        app.get("/reimbursements/{userId}", ReimbursementController::getUserReimbursements);
         app.post("/reimbursements", ReimbursementController::createReimbursement);
         app.patch("/reimbursements/{reimbId}", ReimbursementController::updateReimbursement);
         app.delete("/reimbursements/{reimbId}", ReimbursementController::deleteReimbursement);

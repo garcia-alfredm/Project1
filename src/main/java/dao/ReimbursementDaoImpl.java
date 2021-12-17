@@ -70,6 +70,29 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
     }
 
     @Override
+    public List<Reimbursement> getUserReimbursements(Integer userId) {
+        List<Reimbursement> reimbursements = new ArrayList<>();
+        try{
+            Connection conn = DriverManager.getConnection(url, username, password);
+            String sql = "SELECT * FROM ers_reimbursement WHERE reimb_author_fk = ?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                Reimbursement reimb = new Reimbursement(rs.getInt(1), rs.getBigDecimal(2),
+                        rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getBytes(6),
+                        rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
+                reimbursements.add(reimb);
+            }
+        } catch (SQLException e) {
+            logger.error(e);
+        }
+        return reimbursements;
+    }
+
+    @Override
     public Boolean createReimbursement(Reimbursement reimburse) {
         try{
             Connection conn = DriverManager.getConnection(url, username, password);

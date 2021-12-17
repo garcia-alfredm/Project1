@@ -1,0 +1,16 @@
+.login-container{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(196, 189, 189);
+    width: 400px;
+    height: 200px;
+}
+
+#username-input{
+    margin: 8px;
+    margin-top: 10px;
+}
+
+#password-input{
+    margin: 8px;
+}

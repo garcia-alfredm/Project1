@@ -1,9 +1,13 @@
 import frontcontroller.FrontController;
 import io.javalin.Javalin;
+import io.javalin.http.staticfiles.Location;
 
 public class Main {
     public static void main(String[] args) {
-        Javalin app = Javalin.create().start(7000);
+        Javalin app = Javalin.create(javalinConfig -> {
+            javalinConfig.addStaticFiles("/frontend", Location.CLASSPATH);
+        }).start(7000);
+
         new FrontController(app);
     }
 }

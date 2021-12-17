@@ -20,17 +20,16 @@ public class FrontController {
 
             /* todo validate user credentials here, gets user id */
             Users user = userService.getOneUser(login.getUsername());
-            System.out.println(user);
-            String userrole = "";
+
             if(user.getRoleId() == 1){
-                userrole = "EMPLOYEE";
+                login.setRole("EMPLOYEE");
             } else{
-                userrole = "MANAGER";
+                login.setRole("MANAGER");
             }
 
             context.sessionAttribute("user-session", login);
             context.json( new JsonResponse(true, "login successful",
-                            new LoginDTO(user.getId(), login.getUsername(), userrole)));
+                            new LoginDTO(user.getId(), login.getUsername(), login.getRole())));
         });
 
         app.get("/api/check-session", context -> {

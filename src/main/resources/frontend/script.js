@@ -17,10 +17,7 @@ async function login(e){
         method: "POST",
         body: JSON.stringify({
             username: usernameInputElem.value,
-            password: passwordInputElem.value,
-            //must figure out to get user role from
-            //validation; or maybe no need to use 
-            role: "EMPLOYEE"
+            password: passwordInputElem.value
         })
     })
 

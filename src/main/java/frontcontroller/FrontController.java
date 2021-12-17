@@ -18,8 +18,9 @@ public class FrontController {
         app.post("/api/login", context -> {
             Login login = context.bodyAsClass(Login.class);
 
-            /* todo validate user credentials here, gets user id */
+            //todo include password
             Users user = userService.getOneUser(login.getUsername());
+            login.setUserId(user.getId());
 
             if(user.getRoleId() == 1){
                 login.setRole("EMPLOYEE");
@@ -29,7 +30,7 @@ public class FrontController {
 
             context.sessionAttribute("user-session", login);
             context.json( new JsonResponse(true, "login successful",
-                            new LoginDTO(user.getId(), login.getUsername(), login.getRole())));
+                            new LoginDTO(login.getUserId(), login.getUsername(), login.getRole())));
         });
 
         app.get("/api/check-session", context -> {

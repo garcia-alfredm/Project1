@@ -1,16 +1,26 @@
 package dto;
 
 public class LoginDTO {
-    //Integer userId;
+
+    Integer userId;
     String username;
     String role;
 
     public LoginDTO() {
     }
 
-    public LoginDTO(String username, String role) {
+    public LoginDTO(Integer userId, String username, String role) {
+        this.userId = userId;
         this.username = username;
         this.role = role;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -31,8 +41,9 @@ public class LoginDTO {
 
     @Override
     public String toString() {
-        return "UserDTO{" +
-                "username='" + username + '\'' +
+        return "LoginDTO{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }

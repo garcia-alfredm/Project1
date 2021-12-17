@@ -10,8 +10,9 @@ public interface UsersDao {
 
     List<Users> getAllUsers();
 
-    //todo override with username, password?
     Users getOneUser(Integer userId);
+
+    Users getOneUser(String identifier);
 
     Boolean createUser(Users user);
 

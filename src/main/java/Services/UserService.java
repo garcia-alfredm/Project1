@@ -17,6 +17,8 @@ public class UserService {
 
     public Users getOneUser(Integer userId){ return this.usersDao.getOneUser(userId); }
 
+    public Users getOneUser(String username){ return this.usersDao.getOneUser(username);}
+
     public Boolean createUser(Users user) { return this.usersDao.createUser(user); }
 
     public Boolean updateUser(Integer userId, String column, String value) {

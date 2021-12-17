@@ -1,6 +1,8 @@
 package models;
 
 public class Login {
+
+    Integer userId;
     String username;
     String password;
     String role;
@@ -8,10 +10,19 @@ public class Login {
     public Login() {
     }
 
-    public Login(String username, String password, String role) {
+    public Login(Integer userId, String username, String password, String role) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -41,7 +52,8 @@ public class Login {
     @Override
     public String toString() {
         return "Login{" +
-                "username='" + username + '\'' +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
                 '}';

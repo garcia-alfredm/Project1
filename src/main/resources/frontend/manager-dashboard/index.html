@@ -15,8 +15,47 @@
           <button class="btn btn-outline-danger" onclick="logout()">Logout</button>
         </div>
     </nav>
+
     <h2>Manager Dashboard</h2>
-    <div id="user-info"></div>
+    <!-- Insert logged in managers info -->
+    <div id="manager-info"></div>
+    <br>
+    <div id="reimbursement-filter">
+        <span class="reimbursement-title">Employee Reimbursements</span>
+        <button id="pending-filter">Pending</button>
+        <button id="approved-filter">Approved</button>
+        <button id="denied-filter">Denied</button>
+    </div>
+    <!-- contains reimbursement requests -->
+    <div id="display-reimbursements">
+        <!-- displays individual reimbursement request -->
+        <div class="reimbursement-request" id="43">
+            <div class="user-details">
+                <span class="first-name">First Name</span>
+                <span class="last-name">Last Name</span>
+                <span class="username">username</span>
+                <span class="email">email</span>
+            </div>
+            <div class="reimburse-details">
+                <span class="description">Description</span>
+                <span class="amount">Amount</span>
+                <span class="submitted">Submitted</span>
+                <span class="resolved">Resolved</span>
+                <span class="status">Status</span>
+                <span class="type">Type</span>
+            </div>
+            <div class="resolver-details">
+                <span class="resolver-first-name">Resolver First Name</span>
+                <span class="resolver-last-name">Resolver Last Name</span>
+                <span class="resolver-email">Resolver Email</span>
+            </div>
+            <div class="manager-actions">
+                <!-- button uses reimbursement id to target -->
+                <button class="approve" id="approve-btn-43">Approve</button>
+                <button class="deny" id="deny-btn-43">Deny</button>
+            </div>
+        </div>   
+    </div>
 
     <script src="./script.js"></script>
     <script src="../globals/globals.js"></script>

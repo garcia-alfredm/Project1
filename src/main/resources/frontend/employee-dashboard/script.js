@@ -35,6 +35,7 @@ window.onload = async () => {
     let roleElem = document.createElement("h3");
     roleElem.innerText = result.data.role;
 
+    /* Display logged in users name */
     let userInfo = document.getElementById("user-info");
     userInfo.appendChild(usernameElem);
     userInfo.appendChild(roleElem);
@@ -52,8 +53,6 @@ async function populateRequests(){
     
     //returns array
     let result = await response.json();
-
-    console.log(result);
 
     //clear container
     let displayRequestsContainer = document.getElementById("display-requests-container");

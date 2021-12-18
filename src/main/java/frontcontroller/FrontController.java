@@ -22,6 +22,7 @@ public class FrontController {
             Users user = userService.getOneUser(login.getUsername());
             login.setUserId(user.getId());
 
+            //roles are hardcoded todo removed hardcoded, getOneUser also returns fname,lname, email, role
             if(user.getRoleId() == 1){
                 login.setRole("EMPLOYEE");
             } else{

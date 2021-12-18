@@ -25,5 +25,7 @@ async function login(e){
 
     if(result.successful){
         window.location.href = `./${result.data.role.toLowerCase()}-dashboard`;
+    }else{
+        location.reload();
     }
 }

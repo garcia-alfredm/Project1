@@ -17,7 +17,7 @@ public class UserService {
 
     public Users getOneUser(Integer userId){ return this.usersDao.getOneUser(userId); }
 
-    public Users getOneUser(String username){ return this.usersDao.getOneUser(username);}
+    public Users getOneUser(String username, String password){ return this.usersDao.getOneUser(username, password);}
 
     public Boolean createUser(Users user) { return this.usersDao.createUser(user); }
 

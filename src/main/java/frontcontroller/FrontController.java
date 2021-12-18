@@ -19,19 +19,24 @@ public class FrontController {
             Login login = context.bodyAsClass(Login.class);
 
             //todo include password
-            Users user = userService.getOneUser(login.getUsername());
-            login.setUserId(user.getId());
+            Users user = userService.getOneUser(login.getUsername(), login.getPassword());
 
-            //roles are hardcoded todo removed hardcoded, getOneUser also returns fname,lname, email, role
-            if(user.getRoleId() == 1){
-                login.setRole("EMPLOYEE");
+            if(user == null){
+                context.json(new JsonResponse(false, "incorrect username or password", null));
             } else{
-                login.setRole("MANAGER");
-            }
+                login.setUserId(user.getId());
 
-            context.sessionAttribute("user-session", login);
-            context.json( new JsonResponse(true, "login successful",
-                            new LoginDTO(login.getUserId(), login.getUsername(), login.getRole())));
+                //roles are hardcoded todo removed hardcoded, getOneUser also returns fname,lname, email, role
+                if(user.getRoleId() == 1){
+                    login.setRole("EMPLOYEE");
+                } else{
+                    login.setRole("MANAGER");
+                }
+
+                context.sessionAttribute("user-session", login);
+                context.json( new JsonResponse(true, "login successful",
+                        new LoginDTO(login.getUserId(), login.getUsername(), login.getRole())));
+            }
         });
 
         app.get("/api/check-session", context -> {

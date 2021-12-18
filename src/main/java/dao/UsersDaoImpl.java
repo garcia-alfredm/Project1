@@ -68,13 +68,14 @@ public class UsersDaoImpl implements UsersDao {
     }
 
     @Override
-    public Users getOneUser(String identifier){
+    public Users getOneUser(String identifier, String password){
         Users user = null;
         try{
-            Connection conn = DriverManager.getConnection(url, username, password);
-            String sql = "SELECT * FROM ers_users WHERE ers_username = ?;";
+            Connection conn = DriverManager.getConnection(url, username, this.password);
+            String sql = "SELECT * FROM ers_users WHERE ers_username = ? AND ers_password = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, identifier);
+            ps.setString(2, password);
 
             ResultSet rs = ps.executeQuery();
 

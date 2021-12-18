@@ -12,7 +12,7 @@ public interface UsersDao {
 
     Users getOneUser(Integer userId);
 
-    Users getOneUser(String identifier);
+    Users getOneUser(String identifier, String password);
 
     Boolean createUser(Users user);
 

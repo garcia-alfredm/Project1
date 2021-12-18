@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ReimbursementDaoImpl implements ReimbursementDao {
@@ -94,16 +95,20 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
     @Override
     public Boolean createReimbursement(Reimbursement reimburse) {
+        Date date = new Date(Calendar.getInstance().getTime().getTime());
         try{
             Connection conn = DriverManager.getConnection(url, username, password);
             /* id amount submitted resolved desc receiptImg author resolver status typeid */
             String sql = "INSERT INTO ers_reimbursement VALUES(DEFAULT, ?, ?, DEFAULT, ?, ?, ?, DEFAULT, ?, ? );";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setBigDecimal(1, reimburse.getAmount());
-            ps.setDate(2, (Date) reimburse.getSubmitted());
+            //todo submitted date best to be DEFAULT
+            //ps.setDate(2, (Date) reimburse.getSubmitted());
+            ps.setDate(2, date);
             ps.setString(3, reimburse.getDescription());
             ps.setBytes(4, reimburse.getReceiptImg());
             ps.setInt(5, reimburse.getAuthor());
+            // todo status should be default, PENDING, value 1
             ps.setInt(6, reimburse.getStatus());
             ps.setInt(7, reimburse.getTypeId());
 

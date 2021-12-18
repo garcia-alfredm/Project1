@@ -81,3 +81,36 @@ async function populateRequests(){
 
     });
 }
+
+async function createReimb(e){
+    e.preventDefault();
+
+    //get values from forms input
+    let amountInputElem = document.getElementById("amount-input");
+    let amount_ = Number(amountInputElem.value);
+    let descInputElem = document.getElementById("desc-input");
+    let desc = descInputElem.value;
+    let typeInputElem = document.getElementById("type-input");
+    let type_ = Number(typeInputElem.value);
+
+    await fetch(`${domain}/reimbursements`, {
+        method: "POST",
+        body: JSON.stringify({
+            amount: amount_,
+            //submitted: 
+            //description
+            description: desc,
+            //author
+            author: userId,
+            //status
+            status: 1,
+            //type
+            typeId: type_
+        })
+    })
+    amountInputElem = "";
+    descInputElem = ""; 
+    typeInputElem = "";
+
+    populateRequests()
+}

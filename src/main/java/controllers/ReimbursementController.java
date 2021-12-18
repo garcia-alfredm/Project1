@@ -4,6 +4,7 @@ import Services.ReimbursementService;
 import Services.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dto.UpdateDTO;
 import io.javalin.http.Context;
 import models.Reimbursement;
 
@@ -53,13 +54,16 @@ public class ReimbursementController {
         //todo find way to get reimbursement id to context obj
         // likely have to use context body
         Integer reimbId = Integer.parseInt(context.pathParam("reimbId"));
-        String columnValue = context.body();
+        UpdateDTO updateDTO = context.bodyAsClass(UpdateDTO.class);
+        //String columnValue = context.body();
         //resolverid and statusId
-        String values[] = columnValue.split(" ");
+        /*String values[] = columnValue.split(" ");
         Integer resolverId = Integer.parseInt(values[0]);
-        Integer statusId = Integer.parseInt(values[1]);
+        Integer statusId = Integer.parseInt(values[1]);*/
 
-        Boolean result = reimbursementService.updateReimbursement(reimbId, resolverId, statusId);
+        //Boolean result = reimbursementService.updateReimbursement(reimbId, resolverId, statusId);
+        Boolean result = reimbursementService.updateReimbursement(
+                reimbId, updateDTO.getResolverId(), updateDTO.getStatusId());
         if(result){
             context.result("Reimbursement updated");
         } else {

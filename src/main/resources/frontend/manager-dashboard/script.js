@@ -107,12 +107,46 @@ async function populateReimbursements(){
             `}
             ${reimb.status == 2 || reimb.status == 3 ? '' : `
             <div class="manager-actions">
-                <button class="approve" id="approve-btn-${reimb.id}">Approve</button>
-                <button class="deny" id="deny-btn-${reimb.id}">Deny</button>
+                <button class="approve" id="approve-btn-${reimb.id}" onclick="approveRequest(event)">Approve</button>
+                <button class="deny" id="deny-btn-${reimb.id}" onclick="denyRequest(event)">Deny</button>
             </div>
             `}
         `;
 
         displayReimbursementsContainer.appendChild(requestElem);
     });
+}
+
+async function approveRequest(e){
+    e.preventDefault();
+
+    /* target class contains approval or denials */
+    let id = e.target.id.slice("approve-btn-".length, e.target.id.length);
+    console.log(id);
+
+    /* send request to update reimbursement */
+    await fetch(`${domain}/reimbursements/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+            resolverId: managerId,
+            statusId: 2
+        })
+    })
+    populateReimbursements();
+}
+
+async function denyRequest(e){
+    e.preventDefault();
+
+    let id = e.target.id.slice("deny-btn-".length, e.target.id.length);
+    console.log(id);
+
+    await fetch(`${domain}/reimbursements/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+            resolverId: managerId,
+            statusId: 3
+        })
+    })
+    populateReimbursements();
 }

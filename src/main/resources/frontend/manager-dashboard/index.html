@@ -22,9 +22,10 @@
     <br>
     <div id="reimbursement-filter">
         <span class="reimbursement-title">Employee Reimbursements</span>
-        <button id="pending-filter">Pending</button>
-        <button id="approved-filter">Approved</button>
-        <button id="denied-filter">Denied</button>
+        <button id="all-filter" onclick="populateReimbursements()">All</button>
+        <button id="pending-filter" onclick="filterReimbursements(event, 1)">Pending</button>
+        <button id="approved-filter" onclick="filterReimbursements(event, 2)">Approved</button>
+        <button id="denied-filter" onclick="filterReimbursements(event, 3)">Denied</button>
     </div>
     <!-- contains reimbursement requests -->
     <div id="display-reimbursements">

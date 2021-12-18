@@ -150,3 +150,18 @@ async function denyRequest(e){
     })
     populateReimbursements();
 }
+
+function filterReimbursements(e, filterStatus){
+    e.preventDefault;
+
+    //populateReimbursements();
+
+    /* array of elements with class status */
+    let filter = Array.from(document.getElementsByClassName("status"));
+
+    filter.forEach(elem => {
+        if(elem.innerText != filterStatus){
+            elem.parentNode.parentNode.replaceChildren("");
+        }
+    })
+}

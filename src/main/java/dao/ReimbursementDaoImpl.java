@@ -38,7 +38,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
             while(rs.next()){
                 Reimbursement reimb = new Reimbursement(rs.getInt(1), rs.getBigDecimal(2),
-                        rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getBytes(6),
+                        rs.getString(3), rs.getString(4), rs.getString(5), rs.getBytes(6),
                         rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
                 reimbursements.add(reimb);
             }
@@ -61,7 +61,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
             while(rs.next()){
                 reimbursement = new Reimbursement(rs.getInt(1), rs.getBigDecimal(2),
-                        rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getBytes(6),
+                        rs.getString(3), rs.getString(4), rs.getString(5), rs.getBytes(6),
                         rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
             }
         } catch (SQLException e) {
@@ -83,7 +83,7 @@ public class ReimbursementDaoImpl implements ReimbursementDao {
 
             while(rs.next()){
                 Reimbursement reimb = new Reimbursement(rs.getInt(1), rs.getBigDecimal(2),
-                        rs.getDate(3), rs.getDate(4), rs.getString(5), rs.getBytes(6),
+                        rs.getString(3), rs.getString(4), rs.getString(5), rs.getBytes(6),
                         rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
                 reimbursements.add(reimb);
             }

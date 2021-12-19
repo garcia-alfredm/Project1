@@ -1,13 +1,14 @@
 package models;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Reimbursement {
     Integer id;
     BigDecimal amount;
-    Date submitted;
-    Date resolved;
+    String submitted;
+    String resolved;
     String description;
     //receipt is a bytea
     byte[] receiptImg;
@@ -20,8 +21,8 @@ public class Reimbursement {
     public Reimbursement() {
     }
 
-    public Reimbursement(Integer id, BigDecimal amount, Date submitted,
-                         Date resolved, String description, byte[] receiptImg, Integer author,
+    public Reimbursement(Integer id, BigDecimal amount, String submitted, String resolved,
+                         String description, byte[] receiptImg, Integer author,
                          Integer resolver, Integer status, Integer typeId) {
         this.id = id;
         this.amount = amount;
@@ -51,19 +52,19 @@ public class Reimbursement {
         this.amount = amount;
     }
 
-    public Date getSubmitted() {
+    public String getSubmitted() {
         return submitted;
     }
 
-    public void setSubmitted(Date submitted) {
+    public void setSubmitted(String submitted) {
         this.submitted = submitted;
     }
 
-    public Date getResolved() {
+    public String getResolved() {
         return resolved;
     }
 
-    public void setResolved(Date resolved) {
+    public void setResolved(String resolved) {
         this.resolved = resolved;
     }
 
@@ -120,9 +121,10 @@ public class Reimbursement {
         return "Reimbursement{" +
                 "id=" + id +
                 ", amount=" + amount +
-                ", submitted=" + submitted +
-                ", resolved=" + resolved +
+                ", submitted='" + submitted + '\'' +
+                ", resolved='" + resolved + '\'' +
                 ", description='" + description + '\'' +
+                ", receiptImg=" + Arrays.toString(receiptImg) +
                 ", author=" + author +
                 ", resolver=" + resolver +
                 ", status=" + status +

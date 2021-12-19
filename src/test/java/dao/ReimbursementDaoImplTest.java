@@ -21,12 +21,15 @@ class ReimbursementDaoImplTest {
     UsersDao usersDao;
     ReimbursementDao reimbursementDao;
 
-    Date date;
+    //Date date;
+    java.util.Date value;
+    String date;
 
     ReimbursementDaoImplTest() {
         this.usersDao = new UsersDaoImpl(H2Util.url, H2Util.username, H2Util.password);
         this.reimbursementDao = new ReimbursementDaoImpl(H2Util.url, H2Util.username, H2Util.password);
-        this.date = new Date(Calendar.getInstance().getTime().getTime());
+        this.value = new Date(Calendar.getInstance().getTime().getTime());
+        this.date = this.value + " 00:00:00";
     }
 
     @BeforeEach

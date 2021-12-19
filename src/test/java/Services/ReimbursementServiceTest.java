@@ -19,11 +19,13 @@ class ReimbursementServiceTest {
     ReimbursementDao reimbursementDao = Mockito.mock(ReimbursementDao.class);
     UserService userService = Mockito.mock(UserService.class);
     ReimbursementService reimbursementService;
-    Date date;
+    java.util.Date value;
+    String date;
 
     public ReimbursementServiceTest(){
         this.reimbursementService = new ReimbursementService(reimbursementDao, userService);
-        this.date = new Date(Calendar.getInstance().getTime().getTime());
+        this.value = new Date(Calendar.getInstance().getTime().getTime());
+        this.date = this.value + " 00:00:00";
 
     }
 

@@ -98,14 +98,14 @@ async function populateReimbursements(){
                 <span class="status">${reimb.status}</span>
                 <span class="type">${reimb.typeId}</span>
             </div>
-            ${reimb.status == 1 ? '' : `
+            ${reimb.status == 'PENDING' ? '' : `
             <div class="resolver-details">
                 <span class="resolver-first-name">Resolver First Name</span>
                 <span class="resolver-last-name">Resolver Last Name</span>
                 <span class="resolver-email">Resolver Email</span>
             </div>
             `}
-            ${reimb.status == 2 || reimb.status == 3 ? '' : `
+            ${reimb.status == 'APPROVED' || reimb.status == 'DENIED' ? '' : `
             <div class="manager-actions">
                 <button class="approve" id="approve-btn-${reimb.id}" onclick="approveRequest(event)">Approve</button>
                 <button class="deny" id="deny-btn-${reimb.id}" onclick="denyRequest(event)">Deny</button>
@@ -159,7 +159,9 @@ function filterReimbursements(e, filterStatus){
     /* array of elements with class status */
     let filter = Array.from(document.getElementsByClassName("status"));
 
+    /* for each element of class status */
     filter.forEach(elem => {
+        /*  */
         if(elem.innerText != filterStatus){
             elem.parentNode.parentNode.replaceChildren("");
         }

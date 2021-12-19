@@ -5,6 +5,10 @@ window.addEventListener("load", async () => {
     if(result.successful){
         window.location.href = `./${result.data.role.toLowerCase()}-dashboard`;
     }
+
+    let marker = document.createElement("h3");
+    let body = document.getElementsByTagName("body");
+    body.appendChild(marker);
 })
 
 async function login(e){

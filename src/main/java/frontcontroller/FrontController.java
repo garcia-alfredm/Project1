@@ -18,25 +18,21 @@ public class FrontController {
         app.post("/api/login", context -> {
             Login login = context.bodyAsClass(Login.class);
 
-            //todo include password
+            /* user object contains all details*/
             Users user = userService.getOneUser(login.getUsername(), login.getPassword());
 
             if(user == null){
                 context.json(new JsonResponse(false, "incorrect username or password", null));
             } else{
                 login.setUserId(user.getId());
+                login.setFirstName(user.getFirstName());
+                login.setLastName(user.getLastName());
                 login.setRole(user.getRole());
-
-                //roles are hardcoded todo removed hardcoded, getOneUser also returns fname,lname, email, role
-                /*if(user.getRoleId() == 1){
-                    login.setRole("EMPLOYEE");
-                } else{
-                    login.setRole("MANAGER");
-                }*/
 
                 context.sessionAttribute("user-session", login);
                 context.json( new JsonResponse(true, "login successful",
-                        new LoginDTO(login.getUserId(), login.getUsername(), login.getRole())));
+                        new LoginDTO(login.getUserId(), login.getUsername(), login.getFirstName(),
+                                login.getLastName(), login.getRole())));
             }
         });
 
@@ -48,7 +44,8 @@ public class FrontController {
                context.json(new JsonResponse(false, "no session found", null));
            } else {
                context.json(new JsonResponse(true, "session found",
-                       new LoginDTO(login.getUserId(), login.getUsername(), login.getRole())));
+                       new LoginDTO(login.getUserId(), login.getUsername(), login.getFirstName(),
+                               login.getLastName(), login.getRole())));
            }
         });
 

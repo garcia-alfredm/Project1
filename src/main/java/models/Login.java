@@ -4,15 +4,19 @@ public class Login {
 
     Integer userId;
     String username;
+    String firstName;
+    String lastName;
     String password;
     String role;
 
     public Login() {
     }
 
-    public Login(Integer userId, String username, String password, String role) {
+    public Login(Integer userId, String username, String firstName, String lastName, String password, String role) {
         this.userId = userId;
         this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.password = password;
         this.role = role;
     }
@@ -31,6 +35,22 @@ public class Login {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -54,6 +74,8 @@ public class Login {
         return "Login{" +
                 "userId=" + userId +
                 ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
                 '}';

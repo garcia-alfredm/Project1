@@ -27,17 +27,20 @@ window.onload = async () => {
     if(result.data.role === "MANAGER"){
         window.location.href = "../manager-dashboard";
     }
+    
+    let userFirstName = document.createElement("h2");
+    userFirstName.innerText = result.data.firstName;
 
-    let usernameElem = document.createElement("h2");
-    // if i change json, can get user name, last name etc
-    usernameElem.innerText = result.data.username;
+    let userLastName = document.createElement("h2");
+    userLastName.innerText = result.data.lastName;
 
     let roleElem = document.createElement("h3");
     roleElem.innerText = result.data.role;
 
     /* Display logged in users name */
     let userInfo = document.getElementById("user-info");
-    userInfo.appendChild(usernameElem);
+    userInfo.appendChild(userFirstName);
+    userInfo.appendChild(userLastName);
     userInfo.appendChild(roleElem);
 
     //get userId
@@ -48,7 +51,7 @@ window.onload = async () => {
 }
 
 async function populateRequests(){
-    //fetch users requests, default method GET
+    //fetch all of users requests, default method GET
     let response = await fetch(`${domain}/reimbursements/${userId}`);
     
     //returns array
@@ -65,13 +68,13 @@ async function populateRequests(){
         requestElem.className = "request-container border border-primary";
 
         requestElem.innerHTML = `
-        <div class="display-amount">${reimb.amount}</div>
-            <div class="display-desc">${reimb.description}</div>
-            <div class="display-submitted-date">${reimb.submitted} Date</div>
-            <div class="display-resolved-date">${reimb.resolved} Date</div>
-            <div class="display-resolver">${reimb.resolver}</div>
-            <div class="status">${reimb.status}</div>
-            <div class="type">${reimb.typeId}</div>
+        <div class="display-amount">Amount requested: ${reimb.amount}</div>
+            <div class="display-desc">Description: ${reimb.description}</div>
+            <div class="display-submitted-date">Date submitted: ${reimb.submitted}</div>
+            ${reimb.resolved == null ? '' : `<div class="display-resolved-date"> Date resolved: ${reimb.resolved} Date</div>`}
+            ${reimb.resolver == 0 ? '' : `<div class="display-resolver">Resolver: ${reimb.resolver}</div>`}
+            <div class="status">Reimbursement status: ${reimb.status}</div>
+            <div class="type">Type: ${reimb.type}</div>
         </div>
         `;
 

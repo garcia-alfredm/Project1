@@ -5,7 +5,7 @@ public class Users {
     String username;
     String password;
     String firstName;
-    String LastName;
+    String lastName;
     String email;
     /* Foreign Key referenced in dao */
     /* is used when fetching querys from db*/
@@ -22,7 +22,7 @@ public class Users {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
-        LastName = lastName;
+        this.lastName = lastName;
         this.email = email;
         this.role = role;
     }
@@ -33,7 +33,7 @@ public class Users {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
-        LastName = lastName;
+        this.lastName = lastName;
         this.email = email;
         this.roleId = roleId;
     }
@@ -71,11 +71,11 @@ public class Users {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -111,7 +111,7 @@ public class Users {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", LastName='" + LastName + '\'' +
+                ", LastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
                 '}';

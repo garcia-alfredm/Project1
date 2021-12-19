@@ -4,14 +4,18 @@ public class LoginDTO {
 
     Integer userId;
     String username;
+    String firstName;
+    String lastName;
     String role;
 
     public LoginDTO() {
     }
 
-    public LoginDTO(Integer userId, String username, String role) {
+    public LoginDTO(Integer userId, String username, String firstName, String lastName, String role) {
         this.userId = userId;
         this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.role = role;
     }
 
@@ -31,6 +35,22 @@ public class LoginDTO {
         this.username = username;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getRole() {
         return role;
     }
@@ -44,6 +64,8 @@ public class LoginDTO {
         return "LoginDTO{" +
                 "userId=" + userId +
                 ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }

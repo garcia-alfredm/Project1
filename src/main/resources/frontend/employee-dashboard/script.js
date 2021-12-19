@@ -102,7 +102,7 @@ async function createReimb(e){
             //author
             author: userId,
             //status
-            status: 1,
+            statusId: 1,
             //type
             typeId: type_
         })

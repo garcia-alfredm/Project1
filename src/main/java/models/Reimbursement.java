@@ -13,26 +13,25 @@ public class Reimbursement {
     //receipt is a bytea
     byte[] receiptImg;
     /* Foreign Keys */
+    /* when using inner join to get queries*/
+    String authorUserName;
+    String authorFirstName;
+    String authorLastName;
+    String authorEmail;
+    String status;
+    String type;
+    /* when using create */
     Integer author;
-//    String authorUserName;
-//    String authorFirstName;
-//    String authorLastName;
-//    String authorEmail;
     Integer resolver;
-    //String resolverFirstName;
-    //String resolverLastName;
-    //String resolverEmail
-    Integer status;
-    //String status;
+    Integer statusId;
     Integer typeId;
-    //String type;
 
     public Reimbursement() {
     }
 
     public Reimbursement(Integer id, BigDecimal amount, String submitted, String resolved,
                          String description, byte[] receiptImg, Integer author,
-                         Integer resolver, Integer status, Integer typeId) {
+                         Integer resolver, Integer statusId, Integer typeId) {
         this.id = id;
         this.amount = amount;
         this.submitted = submitted;
@@ -41,8 +40,27 @@ public class Reimbursement {
         this.receiptImg = receiptImg;
         this.author = author;
         this.resolver = resolver;
-        this.status = status;
+        this.statusId = statusId;
         this.typeId = typeId;
+    }
+
+    public Reimbursement(Integer id, BigDecimal amount, String submitted, String resolved,
+                         String description, byte[] receiptImg, String authorUserName,
+                         String authorFirstName, String authorLastName, String authorEmail,
+                         String status, String type, Integer resolver) {
+        this.id = id;
+        this.amount = amount;
+        this.submitted = submitted;
+        this.resolved = resolved;
+        this.description = description;
+        this.receiptImg = receiptImg;
+        this.authorUserName = authorUserName;
+        this.authorFirstName = authorFirstName;
+        this.authorLastName = authorLastName;
+        this.authorEmail = authorEmail;
+        this.status = status;
+        this.type = type;
+        this.resolver = resolver;
     }
 
     public Integer getId() {
@@ -93,6 +111,54 @@ public class Reimbursement {
         this.receiptImg = receiptImg;
     }
 
+    public String getAuthorUserName() {
+        return authorUserName;
+    }
+
+    public void setAuthorUserName(String authorUserName) {
+        this.authorUserName = authorUserName;
+    }
+
+    public String getAuthorFirstName() {
+        return authorFirstName;
+    }
+
+    public void setAuthorFirstName(String authorFirstName) {
+        this.authorFirstName = authorFirstName;
+    }
+
+    public String getAuthorLastName() {
+        return authorLastName;
+    }
+
+    public void setAuthorLastName(String authorLastName) {
+        this.authorLastName = authorLastName;
+    }
+
+    public String getAuthorEmail() {
+        return authorEmail;
+    }
+
+    public void setAuthorEmail(String authorEmail) {
+        this.authorEmail = authorEmail;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public Integer getAuthor() {
         return author;
     }
@@ -109,12 +175,12 @@ public class Reimbursement {
         this.resolver = resolver;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getStatusId() {
+        return statusId;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setStatusId(Integer statusId) {
+        this.statusId = statusId;
     }
 
     public Integer getTypeId() {
@@ -134,10 +200,13 @@ public class Reimbursement {
                 ", resolved='" + resolved + '\'' +
                 ", description='" + description + '\'' +
                 ", receiptImg=" + Arrays.toString(receiptImg) +
-                ", author=" + author +
+                ", authorUserName='" + authorUserName + '\'' +
+                ", authorFirstName='" + authorFirstName + '\'' +
+                ", authorLastName='" + authorLastName + '\'' +
+                ", authorEmail='" + authorEmail + '\'' +
+                ", status='" + status + '\'' +
+                ", type='" + type + '\'' +
                 ", resolver=" + resolver +
-                ", status=" + status +
-                ", typeId=" + typeId +
                 '}';
     }
 }

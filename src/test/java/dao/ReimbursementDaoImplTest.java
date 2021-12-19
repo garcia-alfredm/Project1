@@ -60,12 +60,18 @@ class ReimbursementDaoImplTest {
 
         List<Reimbursement> expectedResults = new ArrayList<>();
         expectedResults.add(new Reimbursement(1, new BigDecimal("200.00"), date,
-                null, "Motel 6", null, 1, 0, 1, 1));
+                null, "Motel 6", null, "user1",
+                "User", "One", "user1@email.com",
+                "PENDING", "LODGING", 0));
         expectedResults.add(new Reimbursement(2, new BigDecimal("10.00"), date,
-                null, "McDonalds", null, 1, 0, 1, 3));
+                null, "McDonalds", null, "user1",
+                "User", "One", "user1@email.com",
+                "PENDING", "FOOD", 0));
 
-        reimbursementDao.createReimbursement(expectedResults.get(0));
-        reimbursementDao.createReimbursement(expectedResults.get(1));
+        reimbursementDao.createReimbursement(new Reimbursement(1, new BigDecimal("200.00"), date,
+                null, "Motel 6", null, 1, 0, 1, 1));
+        reimbursementDao.createReimbursement(new Reimbursement(2, new BigDecimal("10.00"), date,
+                null, "McDonalds", null, 1, 0, 1, 3));
 
         //act
         List<Reimbursement> actualResults = reimbursementDao.getAllReimbursements();
@@ -154,9 +160,13 @@ class ReimbursementDaoImplTest {
         expectedResults.add(new Reimbursement(1, new BigDecimal("200.00"), date,
                 null, "Motel 6", null, 1, 0, 1, 1));
         expectedResults.add(new Reimbursement(2, new BigDecimal("10.00"), date,
-                null, "McDonalds", null, 1, 0, 1, 3));
+                null, "McDonalds", null, "user1",
+                "User", "One", "user1@email.com",
+                "PENDING", "FOOD", 0));
+
         reimbursementDao.createReimbursement(expectedResults.get(0));
-        reimbursementDao.createReimbursement(expectedResults.get(1));
+        reimbursementDao.createReimbursement(new Reimbursement(2, new BigDecimal("10.00"), date,
+                null, "McDonalds", null, 1, 0, 1, 3));
 
         //act
         expectedResults.remove(0);

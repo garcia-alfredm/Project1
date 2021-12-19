@@ -27,7 +27,6 @@ public class UserController {
 
     public static void getOneUser(Context context) throws JsonProcessingException {
         context.contentType("application/json");
-        //todo I need to get the id of the user record, will probably not use this
         Integer userId = Integer.parseInt(context.pathParam("id"));
 
         Users user = userService.getOneUser(userId);

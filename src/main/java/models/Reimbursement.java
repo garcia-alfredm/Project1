@@ -14,9 +14,18 @@ public class Reimbursement {
     byte[] receiptImg;
     /* Foreign Keys */
     Integer author;
+//    String authorUserName;
+//    String authorFirstName;
+//    String authorLastName;
+//    String authorEmail;
     Integer resolver;
+    //String resolverFirstName;
+    //String resolverLastName;
+    //String resolverEmail
     Integer status;
+    //String status;
     Integer typeId;
+    //String type;
 
     public Reimbursement() {
     }

@@ -9,6 +9,7 @@ public class Users {
     String email;
     /* Foreign Key */
     Integer roleId;
+    //String role;
 
     public Users() {
     }

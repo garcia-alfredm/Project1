@@ -7,25 +7,28 @@ public class Users {
     String firstName;
     String LastName;
     String email;
-    /* Foreign Key */
+    /* Foreign Key referenced in dao */
+    /* is used when fetching querys from db*/
+    String role;
+    /* is used when creating users*/
     Integer roleId;
-    //String role;
 
     public Users() {
     }
 
-    public Users(String username, String password, String firstName, String lastName, String email, Integer roleId) {
+    /* is used when getting user from db*/
+    public Users(Integer id, String username, String password, String firstName, String lastName, String email, String role) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         LastName = lastName;
         this.email = email;
-        this.roleId = roleId;
+        this.role = role;
     }
 
-    //todo determine to delete constructor, only use for testing
-    public Users(Integer id, String username, String password, String firstName,
-                 String lastName, String email, Integer roleId) {
+    /* is used when creating user in db*/
+    public Users(Integer id, String username, String password, String firstName, String lastName, String email, Integer roleId) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -34,8 +37,6 @@ public class Users {
         this.email = email;
         this.roleId = roleId;
     }
-
-
 
     public Integer getId() {
         return id;
@@ -85,6 +86,14 @@ public class Users {
         this.email = email;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public Integer getRoleId() {
         return roleId;
     }
@@ -92,6 +101,8 @@ public class Users {
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
+
+    //no to string impl
 
     @Override
     public String toString() {
@@ -102,7 +113,7 @@ public class Users {
                 ", firstName='" + firstName + '\'' +
                 ", LastName='" + LastName + '\'' +
                 ", email='" + email + '\'' +
-                ", roleId=" + roleId +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

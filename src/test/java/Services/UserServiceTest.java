@@ -24,9 +24,9 @@ class UserServiceTest {
         //assign
         List<Users> expectedResults = new ArrayList<>();
         expectedResults.add(new Users(1, "user1", "password", "User",
-                "One", "user1@email.com", 1 ));
+                "One", "user1@email.com", "EMPLOYEE" ));
         expectedResults.add(new Users(2, "user2", "password", "User",
-                "Two", "user2@email.com", 1 ));
+                "Two", "user2@email.com", "EMPLOYEE" ));
         Mockito.when(usersDao.getAllUsers()).thenReturn(expectedResults);
 
         //act
@@ -40,7 +40,7 @@ class UserServiceTest {
     void getOneUser() {
         //assign
         Users expectedResult = new Users(1, "user1", "password", "User",
-                "One", "user1@email.com", 1 );
+                "One", "user1@email.com", "EMPLOYEE" );
         Mockito.when(usersDao.getOneUser(1)).thenReturn(expectedResult);
 
         //act
@@ -54,7 +54,7 @@ class UserServiceTest {
     void createUser() {
         //assign
         Users user = new Users(1, "user1", "password", "User",
-                "One", "user1@email.com", 1 );
+                "One", "user1@email.com", "EMPLOYEE" );
 
         //act
         userService.createUser(user);
@@ -67,7 +67,7 @@ class UserServiceTest {
     void updateUser() {
         //assign
         Users user = new Users(1, "user1", "password", "User",
-                "One", "user1@email.com", 1 );
+                "One", "user1@email.com", "EMPLOYEE" );
         userService.createUser(user);
 
         //act
@@ -83,7 +83,7 @@ class UserServiceTest {
     void deleteUser() {
         //assign
         Users user = new Users(1, "user1", "password", "User",
-                "One", "user1@email.com", 1 );
+                "One", "user1@email.com", "EMPLOYEE" );
         userService.createUser(user);
 
         //act

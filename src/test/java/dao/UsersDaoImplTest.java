@@ -32,11 +32,13 @@ public class UsersDaoImplTest {
         //assign
         List<Users> expectedResults = new ArrayList<>();
         expectedResults.add(new Users(1, "user1", "password", "User",
-                "One", "user1@email.com", 1 ));
+                "One", "user1@email.com", "EMPLOYEE" ));
         expectedResults.add(new Users(2, "user2", "password", "User",
-                "Two", "user2@email.com", 1 ));
-        usersDao.createUser(expectedResults.get(0));
-        usersDao.createUser(expectedResults.get(1));
+                "Two", "user2@email.com", "MANAGER" ));
+        usersDao.createUser(new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1));
+        usersDao.createUser(new Users(2, "user2", "password", "User",
+                "Two", "user2@email.com", 2 ));
 
         //act
         List<Users> actualResults = usersDao.getAllUsers();
@@ -49,8 +51,9 @@ public class UsersDaoImplTest {
     void getOneUser() {
         //assign
         Users expectedResult = new Users(1, "user1", "password", "User",
-                "One", "user1@email.com", 1 );
-        usersDao.createUser(expectedResult);
+                "One", "user1@email.com", "EMPLOYEE" );
+        usersDao.createUser(new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1));
 
         //act
         Users actualResult = usersDao.getOneUser(expectedResult.getId());
@@ -63,14 +66,12 @@ public class UsersDaoImplTest {
     void createUser() {
         //assign
         List<Users> expectedResults = new ArrayList<>();
-        expectedResults.add(new Users("user1", "password", "User",
-                "One", "user1@email.com", 1 ));
-        expectedResults.add(new Users("user2", "password", "User",
-                "Two", "user2@email.com", 1 ));
+        expectedResults.add(new Users(1, "user1", "password", "User", "One", "user1@email.com", "EMPLOYEE" ));
+        expectedResults.add(new Users(2, "user2", "password", "User", "Two", "user2@email.com", "EMPLOYEE" ));
 
         //act
-        usersDao.createUser(expectedResults.get(0));
-        usersDao.createUser(expectedResults.get(1));
+        usersDao.createUser(new Users(1, "user1", "password", "User", "One", "user1@email.com", 1 ));
+        usersDao.createUser(new Users(2, "user2", "password", "User", "Two", "user2@email.com", 2 ));
         Integer actualResult = usersDao.getAllUsers().size();
 
         //assert
@@ -82,8 +83,9 @@ public class UsersDaoImplTest {
         //assign
         Boolean expectedResult = true;
         Users user = new Users(1, "user1", "password", "User",
-                "One", "user1@email.com", 1 );
-        usersDao.createUser(user);
+                "One", "user1@email.com", "EMPLOYEE" );
+        usersDao.createUser(new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1 ));
 
         //act
         Boolean actualResult = usersDao.updateUser(1,"ers_password", "p4ssw0rd");
@@ -97,8 +99,9 @@ public class UsersDaoImplTest {
         //assign
         Boolean expectedResult = true;
         Users user = new Users(1, "user1", "password", "User",
-                "One", "user1@email.com", 1 );
-        usersDao.createUser(user);
+                "One", "user1@email.com", "EMPLOYEE" );
+        usersDao.createUser(new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1 ));
 
         //act
         Boolean actualResult = usersDao.deleteUser(user.getId());

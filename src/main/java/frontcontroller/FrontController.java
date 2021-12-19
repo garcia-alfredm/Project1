@@ -25,13 +25,14 @@ public class FrontController {
                 context.json(new JsonResponse(false, "incorrect username or password", null));
             } else{
                 login.setUserId(user.getId());
+                login.setRole(user.getRole());
 
                 //roles are hardcoded todo removed hardcoded, getOneUser also returns fname,lname, email, role
-                if(user.getRoleId() == 1){
+                /*if(user.getRoleId() == 1){
                     login.setRole("EMPLOYEE");
                 } else{
                     login.setRole("MANAGER");
-                }
+                }*/
 
                 context.sessionAttribute("user-session", login);
                 context.json( new JsonResponse(true, "login successful",

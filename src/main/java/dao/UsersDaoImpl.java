@@ -31,13 +31,15 @@ public class UsersDaoImpl implements UsersDao {
         List<Users> users = new ArrayList<>();
         try{
             Connection conn = DriverManager.getConnection(url, username, password);
-            String sql = "SELECT * FROM ers_users;";
+            /* using inner join to get users with roles included */
+            String sql = "SELECT eu.ers_user_id, eu.ers_username, eu.ers_password, eu.user_first_name, eu.user_last_name, eu.user_email, eur.user_role\n" +
+                    "FROM ers_users eu INNER JOIN ers_user_roles eur ON eu.user_role_id_fk = eur.ers_user_role_id;";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()){
                 Users user = new Users(rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -51,7 +53,8 @@ public class UsersDaoImpl implements UsersDao {
         Users user = null;
         try {
             Connection conn = DriverManager.getConnection(url ,username, password);
-            String sql = "SELECT * FROM ers_users WHERE ers_user_id = ?;";
+            String sql = "SELECT eu.ers_user_id, eu.ers_username, eu.ers_password, eu.user_first_name, eu.user_last_name, eu.user_email, eur.user_role \n" +
+                    "FROM ers_users eu INNER JOIN ers_user_roles eur ON eu.user_role_id_fk = eur.ers_user_role_id WHERE eu.ers_user_id = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, userId);
 
@@ -59,7 +62,7 @@ public class UsersDaoImpl implements UsersDao {
 
             while(rs.next() ){
                 user = new Users(rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
             }
         } catch (SQLException e) {
             logger.error(e);
@@ -68,20 +71,21 @@ public class UsersDaoImpl implements UsersDao {
     }
 
     @Override
-    public Users getOneUser(String identifier, String password){
+    public Users getOneUser(String identifier, String password_){
         Users user = null;
         try{
             Connection conn = DriverManager.getConnection(url, username, this.password);
-            String sql = "SELECT * FROM ers_users WHERE ers_username = ? AND ers_password = ?;";
+            String sql = "SELECT eu.ers_user_id, eu.ers_username, eu.ers_password, eu.user_first_name, eu.user_last_name, eu.user_email, eur.user_role" +
+                    " FROM ers_users eu INNER JOIN ers_user_roles eur ON eu.user_role_id_fk = eur.ers_user_role_id WHERE eu.ers_username = ? AND eu.ers_password = ?;";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, identifier);
-            ps.setString(2, password);
+            ps.setString(2, password_);
 
             ResultSet rs = ps.executeQuery();
 
             while(rs.next() ){
                 user = new Users(rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+                        rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
             }
         } catch (SQLException e) {
             e.printStackTrace();

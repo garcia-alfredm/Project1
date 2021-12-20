@@ -28,24 +28,20 @@
     </div>
     <div id="display-requests-container">
         <div class="request-container border border-primary">
-            <span class="display-desc">Description</span>
-            <span class="type">Type</span>
-            <span class="display-amount">Amount</span>
-            <br>
-            <span class="status">Status</span>
-            <span class="display-submitted-date">Submitted Date</span>
-            <span class="display-resolved-date">Resolved Date</span> 
+            <div class="request-item display-amount">Amount requested: ${reimb.amount}</div>
+            <div class="request-item display-desc">Description: ${reimb.description}</div>
+            <div class="request-item display-submitted-date">Date submitted: ${reimb.submitted}</div>
+            <div class="request-item display-resolved-date"> Date resolved: ${reimb.resolved}</div>
+            <div class="request-item display-resolver">Resolver: ${reimb.resolver}</div>
+            <div class="request-item status">Reimbursement status: ${reimb.status}</div>
+            <div class="request-item type">Type: ${reimb.type}</div>
         </div>
         <div class="request-container border border-primary">
-            <span class="display-desc">Description</span>
-            <span class="type">Type</span>
-            <span class="display-amount">Amount</span>
-            <br>
-            <span class="status">Status</span>
-            <span class="display-submitted-date">Submitted Date</span>
-            <span class="display-resolved-date">Resolved Date</span> 
-            <br>
-            <span class="display-resolver">Resolver</span> 
+            <div class="request-item display-amount">Amount requested: ${reimb.amount}</div>
+            <div class="request-item display-desc">Description: ${reimb.description}</div>
+            <div class="request-item display-submitted-date">Date submitted: ${reimb.submitted}</div>
+            <div class="request-item status">Reimbursement status: ${reimb.status}</div>
+            <div class="request-item type">Type: ${reimb.type}</div>
         </div>
     </div>
 

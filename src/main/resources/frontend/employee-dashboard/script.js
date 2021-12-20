@@ -68,13 +68,13 @@ async function populateRequests(){
         requestElem.className = "request-container border border-primary";
 
         requestElem.innerHTML = `
-        <div class="display-amount">Amount requested: ${reimb.amount}</div>
-            <div class="display-desc">Description: ${reimb.description}</div>
-            <div class="display-submitted-date">Date submitted: ${reimb.submitted}</div>
-            ${reimb.resolved == null ? '' : `<div class="display-resolved-date"> Date resolved: ${reimb.resolved} Date</div>`}
-            ${reimb.resolver == 0 ? '' : `<div class="display-resolver">Resolver: ${reimb.resolver}</div>`}
-            <div class="status">Reimbursement status: ${reimb.status}</div>
-            <div class="type">Type: ${reimb.type}</div>
+        <div class="request-item display-amount">Amount requested: $${reimb.amount}</div>
+            <div class="request-item display-desc">Description: ${reimb.description}</div>
+            <div class="request-item display-submitted-date">Date submitted: ${reimb.submitted}</div>
+            ${reimb.resolved == null ? '' : `<div class="request-item display-resolved-date"> Date resolved: ${reimb.resolved}</div>`}
+            ${reimb.resolver == 0 ? '' : `<div class="request-item display-resolver">Resolver: ${reimb.resolver}</div>`}
+            <div class="request-item status">Reimbursement status: ${reimb.status}</div>
+            <div class="request-item type">Type: ${reimb.type}</div>
         </div>
         `;
 

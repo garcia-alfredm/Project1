@@ -78,15 +78,14 @@ async function populateReimbursements(){
     result.forEach(reimb => {
         /* create reimbursement request container */
         let requestElem = document.createElement("div");
-        requestElem.className = "reimbursement-request";
+        requestElem.className = "reimbursement-request border border-primary";
         /* assign reimbursement request id */
         requestElem.id = reimb.id;
 
         /* inner html has containers displaying formatted data */
         requestElem.innerHTML = `
             <div class="user-details">
-                <span class="first-name">${reimb.authorFirstName}</span>
-                <span class="last-name">${reimb.authorLastName}</span>
+                <span class="fullname-name">${reimb.authorFirstName} ${reimb.authorLastName}</span>
                 <br>
                 <span class="username">Employee Username: ${reimb.authorUserName}</span>
                 <span class="email">Employee Email: ${reimb.authorEmail}</span>
@@ -100,10 +99,10 @@ async function populateReimbursements(){
                 <span class="status">Status: ${reimb.status}</span>
             </div>
             ${reimb.status == 'APPROVED' || reimb.status == 'DENIED' ? '' : `
-            <div class="manager-actions">
-                <button class="approve" id="approve-btn-${reimb.id}" onclick="approveRequest(event)">Approve</button>
-                <button class="deny" id="deny-btn-${reimb.id}" onclick="denyRequest(event)">Deny</button>
-            </div>
+                <div class="manager-actions">
+                    <button class="btn btn-primary approve" id="approve-btn-${reimb.id}" onclick="approveRequest(event)">Approve</button>
+                    <button class="btn btn-primary deny" id="deny-btn-${reimb.id}" onclick="denyRequest(event)">Deny</button>
+                </div>
             `}
         `;
 
@@ -152,11 +151,12 @@ function filterReimbursements(e, filterStatus){
 
     /* array of elements with class status */
     let filter = Array.from(document.getElementsByClassName("status"));
+    console.log(filter);
 
     /* for each element of class status */
     filter.forEach(elem => {
         /*  */
-        if(elem.innerText != filterStatus){
+        if(elem.innerText != "Status: " + filterStatus){
             elem.parentNode.parentNode.replaceChildren("");
         }
     })

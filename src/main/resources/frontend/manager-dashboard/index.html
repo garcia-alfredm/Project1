@@ -20,20 +20,40 @@
     <!-- Insert logged in managers info -->
     <div id="manager-info"></div>
     <br>
-    <div id="reimbursement-filter">
+    <div class="container border border-primary" id="reimbursement-filter">
         <span class="reimbursement-title">Employee Reimbursements</span>
-        <button id="all-filter" onclick="populateReimbursements()">All</button>
-        <button id="pending-filter" onclick="filterReimbursements(event, 'PENDING')">Pending</button>
-        <button id="approved-filter" onclick="filterReimbursements(event, 'APPROVED')">Approved</button>
-        <button id="denied-filter" onclick="filterReimbursements(event, 'DENIED')">Denied</button>
+        <button class="reimbursement-title btn btn-primary" id="all-filter" onclick="populateReimbursements()">All</button>
+        <button class="reimbursement-title btn btn-primary" id="pending-filter" onclick="filterReimbursements(event, 'PENDING')">Pending</button>
+        <button class="reimbursement-title btn btn-primary" id="approved-filter" onclick="filterReimbursements(event, 'APPROVED')">Approved</button>
+        <button class="reimbursement-title btn btn-primary" id="denied-filter" onclick="filterReimbursements(event, 'DENIED')">Denied</button>
     </div>
     <!-- contains reimbursement requests -->
     <div id="display-reimbursements">
         <!-- displays individual reimbursement request -->
-        <div class="reimbursement-request" id="43">
+        <div class="reimbursement-request border border-primary" id="43">
             <div class="user-details">
-                <span class="first-name">First Name</span>
-                <span class="last-name">Last Name</span>
+                <div class="first-name">First Name</div>
+                <div class="last-name">Last Name</div>
+                <div class="username">username</div>
+                <div class="email">email</div>
+            </div>
+            <div class="reimburse-details">
+                <span class="description">Description</span>
+                <span class="amount">Amount</span>
+                <span class="submitted">Submitted</span>
+                <span class="resolved">Resolved</span>
+                <span class="status">Status</span>
+                <span class="type">Type</span>
+            </div>
+            <div class="manager-actions">
+                <!-- button uses reimbursement id to target -->
+                <button class="approve btn btn-primary" id="approve-btn-43" onclick="approveRequest(event)">Approve</button>
+                <button class="deny btn btn-primary" id="deny-btn-43" onclick="denyRequest(event)">Deny</button>
+            </div>
+        </div>
+        <div class="reimbursement-request border border-primary" id="44">
+            <div class="user-details">
+                <span class="fullname">FirstName LastName</span>
                 <span class="username">username</span>
                 <span class="email">email</span>
             </div>
@@ -45,17 +65,12 @@
                 <span class="status">Status</span>
                 <span class="type">Type</span>
             </div>
-            <div class="resolver-details">
-                <span class="resolver-first-name">Resolver First Name</span>
-                <span class="resolver-last-name">Resolver Last Name</span>
-                <span class="resolver-email">Resolver Email</span>
-            </div>
             <div class="manager-actions">
                 <!-- button uses reimbursement id to target -->
-                <button class="approve" id="approve-btn-43" onclick="approveRequest(event)">Approve</button>
-                <button class="deny" id="deny-btn-43" onclick="denyRequest(event)">Deny</button>
+                <button class="approve btn btn-primary" id="approve-btn-43" onclick="approveRequest(event)">Approve</button>
+                <button class="deny btn btn-primary" id="deny-btn-43" onclick="denyRequest(event)">Deny</button>
             </div>
-        </div>   
+        </div> 
     </div>
 
     <script src="./script.js"></script>

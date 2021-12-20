@@ -85,26 +85,20 @@ async function populateReimbursements(){
         /* inner html has containers displaying formatted data */
         requestElem.innerHTML = `
             <div class="user-details">
-                <span class="first-name">First Name</span>
-                <span class="last-name">Last Name</span>
-                <span class="username">username</span>
-                <span class="email">email</span>
+                <span class="first-name">${reimb.authorFirstName}</span>
+                <span class="last-name">${reimb.authorLastName}</span>
+                <br>
+                <span class="username">Employee Username: ${reimb.authorUserName}</span>
+                <span class="email">Employee Email: ${reimb.authorEmail}</span>
             </div>
             <div class="reimburse-details">
-                <span class="description">${reimb.description}</span>
-                <span class="amount">${reimb.amount}</span>
-                <span class="submitted">${reimb.submitted}</span>
-                <span class="resolved">${reimb.resolved}</span>
-                <span class="status">${reimb.status}</span>
-                <span class="type">${reimb.typeId}</span>
+                <span class="description">Description: ${reimb.description}</span>
+                <span class="amount">Amount Requested: ${reimb.amount}</span>
+                <span class="type">Type:${reimb.type}</span>
+                <span class="submitted"> Date Submittted: ${reimb.submitted}</span>
+                ${reimb.resolved == null ? '' : `<span class="resolved">Date Resolved: ${reimb.resolved}</span>`}
+                <span class="status">Status: ${reimb.status}</span>
             </div>
-            ${reimb.status == 'PENDING' ? '' : `
-            <div class="resolver-details">
-                <span class="resolver-first-name">Resolver First Name</span>
-                <span class="resolver-last-name">Resolver Last Name</span>
-                <span class="resolver-email">Resolver Email</span>
-            </div>
-            `}
             ${reimb.status == 'APPROVED' || reimb.status == 'DENIED' ? '' : `
             <div class="manager-actions">
                 <button class="approve" id="approve-btn-${reimb.id}" onclick="approveRequest(event)">Approve</button>

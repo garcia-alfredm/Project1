@@ -18,6 +18,18 @@ To download repository:
 
 ```git clone https://github.com/garcia-alfredm/Project1.git```
 
+To set up enviornment variables:
+* update .bashrc file to include aws credentials
+```
+export AWS_RDS_ENDPOINT='[location of aws ec2 domain]'
+export RDS_USERNAME='[ec2 username]'
+export RDS_PASSWORD='[ec2 password]'
+```
+
+* Run javalin server using IntelliJ
+* use web browser to navigate to client side
+```http://localhost:7000```
+
 ## Usage
 Employees and Financial Managers will be able to login and access their account dashboard.
 

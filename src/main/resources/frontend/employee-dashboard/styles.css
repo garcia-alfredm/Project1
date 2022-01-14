@@ -1,0 +1,56 @@
+.create-request-container{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.create-reimb-form{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#amount-input{
+    -moz-appearance: textfield;
+}
+
+#type-input{
+    -moz-appearance: textfield;
+}
+
+/* will display all reimbursement requests */
+#display-requests-container{
+    display: flex;
+    /* align-items: flex-start; */
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+/* displays each individual request */
+.request-container{
+    display:flex;
+    padding: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    justify-content: space-evenly;
+
+}
+
+.request-item{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+/* .request-container{
+    border-width: 8px;
+    border-color: black;
+} */

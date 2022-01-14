@@ -1,0 +1,50 @@
+.manager-info{
+    padding: 10px
+}
+
+#reimbursement-filter{
+    display: flex;
+
+}
+
+.reimbursement-title{
+    margin: 10px;
+    padding: 5px
+}
+
+/* contains all reimbursement requests */
+#display-reimbursements{
+    margin: 30px;
+
+}
+
+/* individual reimbursement request */
+.reimbursement-request{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px;
+
+}
+
+.user-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 15px;
+}  
+
+.reimburse-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 15px;
+
+}
+
+.manager-actions{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 15px;
+
+}

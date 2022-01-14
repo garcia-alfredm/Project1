@@ -21,12 +21,15 @@ class ReimbursementDaoImplTest {
     UsersDao usersDao;
     ReimbursementDao reimbursementDao;
 
-    Date date;
+    //Date date;
+    java.util.Date value;
+    String date;
 
     ReimbursementDaoImplTest() {
         this.usersDao = new UsersDaoImpl(H2Util.url, H2Util.username, H2Util.password);
         this.reimbursementDao = new ReimbursementDaoImpl(H2Util.url, H2Util.username, H2Util.password);
-        this.date = new Date(Calendar.getInstance().getTime().getTime());
+        this.value = new Date(Calendar.getInstance().getTime().getTime());
+        this.date = this.value + " 00:00:00";
     }
 
     @BeforeEach
@@ -51,17 +54,24 @@ class ReimbursementDaoImplTest {
     void getAllReimbursements() {
         //assign
         Users user = new Users(1, "user1", "password", "User",
-                "One", "user1@email.com", 1 );
-        usersDao.createUser(user);
+                "One", "user1@email.com", "EMPLOYEE" );
+        usersDao.createUser(new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1 ));
 
         List<Reimbursement> expectedResults = new ArrayList<>();
         expectedResults.add(new Reimbursement(1, new BigDecimal("200.00"), date,
-                null, "Motel 6", null, 1, 0, 1, 1));
+                null, "Motel 6", null, "user1",
+                "User", "One", "user1@email.com",
+                "PENDING", "LODGING", 0));
         expectedResults.add(new Reimbursement(2, new BigDecimal("10.00"), date,
-                null, "McDonalds", null, 1, 0, 1, 3));
+                null, "McDonalds", null, "user1",
+                "User", "One", "user1@email.com",
+                "PENDING", "FOOD", 0));
 
-        reimbursementDao.createReimbursement(expectedResults.get(0));
-        reimbursementDao.createReimbursement(expectedResults.get(1));
+        reimbursementDao.createReimbursement(new Reimbursement(1, new BigDecimal("200.00"), date,
+                null, "Motel 6", null, 1, 0, 1, 1));
+        reimbursementDao.createReimbursement(new Reimbursement(2, new BigDecimal("10.00"), date,
+                null, "McDonalds", null, 1, 0, 1, 3));
 
         //act
         List<Reimbursement> actualResults = reimbursementDao.getAllReimbursements();
@@ -74,8 +84,9 @@ class ReimbursementDaoImplTest {
     void getOneReimbursement() {
         //assign
         Users user = new Users(1, "user1", "password", "User",
-                "One", "user1@email.com", 1 );
-        usersDao.createUser(user);
+                "One", "user1@email.com", "EMPLOYEE" );
+        usersDao.createUser(new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1 ));
 
         Reimbursement expectedResult = new Reimbursement(1, new BigDecimal("200.00"), date,
                 null, "Motel 6", null, 1, 0, 1, 1);
@@ -92,8 +103,9 @@ class ReimbursementDaoImplTest {
     void createReimbursement() {
         //assign
         Users user = new Users(1, "user1", "password", "User",
-                "One", "user1@email.com", 1 );
-        usersDao.createUser(user);
+                "One", "user1@email.com", "EMPLOYEE" );
+        usersDao.createUser(new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1 ));
 
         List<Reimbursement> expectedResults = new ArrayList<>();
         expectedResults.add(new Reimbursement(1, new BigDecimal("200.00"), date,
@@ -117,11 +129,13 @@ class ReimbursementDaoImplTest {
         Boolean expectedResult = true;
         List<Users> users = new ArrayList<>();
         users.add(new Users(1, "user1", "password", "User",
-                "One", "user1@email.com", 1 ));
+                "One", "user1@email.com", "EMPLOYEE" ));
         users.add(new Users(2, "user2", "password", "User",
+                "Two", "user2@email.com", "MANAGER" ));
+        usersDao.createUser(new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1));
+        usersDao.createUser(new Users(2, "user2", "password", "User",
                 "Two", "user2@email.com", 2 ));
-        usersDao.createUser(users.get(0));
-        usersDao.createUser(users.get(1));
 
         Reimbursement toPass = new Reimbursement(1, new BigDecimal("200.00"), date,
                 null, "Motel 6", null, 1, 0, 1, 1);
@@ -138,16 +152,21 @@ class ReimbursementDaoImplTest {
     void deleteReimbursement() {
         //assign
         Users user = new Users(1, "user1", "password", "User",
-                "One", "user1@email.com", 1 );
-        usersDao.createUser(user);
+                "One", "user1@email.com", "EMPLOYEE" );
+        usersDao.createUser(new Users(1, "user1", "password", "User",
+                "One", "user1@email.com", 1));
 
         List<Reimbursement> expectedResults = new ArrayList<>();
         expectedResults.add(new Reimbursement(1, new BigDecimal("200.00"), date,
                 null, "Motel 6", null, 1, 0, 1, 1));
         expectedResults.add(new Reimbursement(2, new BigDecimal("10.00"), date,
-                null, "McDonalds", null, 1, 0, 1, 3));
+                null, "McDonalds", null, "user1",
+                "User", "One", "user1@email.com",
+                "PENDING", "FOOD", 0));
+
         reimbursementDao.createReimbursement(expectedResults.get(0));
-        reimbursementDao.createReimbursement(expectedResults.get(1));
+        reimbursementDao.createReimbursement(new Reimbursement(2, new BigDecimal("10.00"), date,
+                null, "McDonalds", null, 1, 0, 1, 3));
 
         //act
         expectedResults.remove(0);

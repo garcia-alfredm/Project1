@@ -187,8 +187,8 @@ public class H2Util {
             String sql = "CREATE TABLE ers_reimbursement(\n" +
                     "\treimb_id serial PRIMARY KEY,\n" +
                     "\treimb_amount NUMERIC (7,2) NOT NULL,\n" +
-                    "\treimb_submitted timestamp DEFAULT now(),\n" +
-                    "\treimb_resolved timestamp,\n" +
+                    "\treimb_submitted timestamp(0) DEFAULT now(),\n" +
+                    "\treimb_resolved timestamp(0),\n" +
                     "\treimb_description varchar(250),\n" +
                     "\treimb_receipt bytea UNIQUE,\n" +
                     "\treimb_author_fk int REFERENCES ers_users(ers_user_id),\n" +

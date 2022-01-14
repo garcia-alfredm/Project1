@@ -5,36 +5,38 @@ public class Users {
     String username;
     String password;
     String firstName;
-    String LastName;
+    String lastName;
     String email;
-    /* Foreign Key */
+    /* Foreign Key referenced in dao */
+    /* is used when fetching querys from db*/
+    String role;
+    /* is used when creating users*/
     Integer roleId;
 
     public Users() {
     }
 
-    public Users(String username, String password, String firstName, String lastName, String email, Integer roleId) {
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        LastName = lastName;
-        this.email = email;
-        this.roleId = roleId;
-    }
-
-    //todo determine to delete constructor, only use for testing
-    public Users(Integer id, String username, String password, String firstName,
-                 String lastName, String email, Integer roleId) {
+    /* is used when getting user from db*/
+    public Users(Integer id, String username, String password, String firstName, String lastName, String email, String role) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
-        LastName = lastName;
+        this.lastName = lastName;
+        this.email = email;
+        this.role = role;
+    }
+
+    /* is used when creating user in db*/
+    public Users(Integer id, String username, String password, String firstName, String lastName, String email, Integer roleId) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.roleId = roleId;
     }
-
-
 
     public Integer getId() {
         return id;
@@ -69,11 +71,11 @@ public class Users {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -84,6 +86,14 @@ public class Users {
         this.email = email;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public Integer getRoleId() {
         return roleId;
     }
@@ -92,6 +102,8 @@ public class Users {
         this.roleId = roleId;
     }
 
+    //no to string impl
+
     @Override
     public String toString() {
         return "Users{" +
@@ -99,9 +111,9 @@ public class Users {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", LastName='" + LastName + '\'' +
+                ", LastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", roleId=" + roleId +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

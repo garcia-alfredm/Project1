@@ -9,5 +9,6 @@ public class Main {
         }).start(7000);
 
         new FrontController(app);
+        
     }
 }

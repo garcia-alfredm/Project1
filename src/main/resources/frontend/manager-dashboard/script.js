@@ -29,7 +29,7 @@
 
 let managerId;
 //current domain
-let domain = "";
+//let domain = "";
 //let domain = "http://54.172.148.216:7000";
 
 window.onload = async () => {

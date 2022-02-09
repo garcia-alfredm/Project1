@@ -1,5 +1,5 @@
 //let domain = "http://54.172.148.216:7000";
-let domain = ""
+//let domain = ""
 
 window.addEventListener("load", async () => {
     let response = await fetch(`${domain}/api/check-session`);

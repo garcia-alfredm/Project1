@@ -1,5 +1,8 @@
+//let domain = "http://54.172.148.216:7000";
+let domain = ""
+
 window.addEventListener("load", async () => {
-    let response = await fetch("http://localhost:7000/api/check-session");
+    let response = await fetch(`${domain}/api/check-session`);
     let result = await response.json();
 
     if(result.successful){
@@ -17,7 +20,7 @@ async function login(e){
     let usernameInputElem = document.getElementById("username-input");
     let passwordInputElem = document.getElementById("password-input");
 
-    let response = await fetch("http://localhost:7000/api/login", {
+    let response = await fetch(`${domain}/api/login`, {
         method: "POST",
         body: JSON.stringify({
             username: usernameInputElem.value,

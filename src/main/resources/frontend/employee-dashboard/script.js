@@ -12,10 +12,11 @@
 
 let userId;
 //current domain
+//let domain = "http://54.172.148.216:7000";
 let domain = "";
 
 window.onload = async () => {
-    let response = await fetch("http://localhost:7000/api/check-session");
+    let response = await fetch(`${domain}/api/check-session`);
     let result = await response.json();
 
     //go to login if no session is found
